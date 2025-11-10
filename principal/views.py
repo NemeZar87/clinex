@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from cuenta.models import UsuarioPersonalizado
 from django.shortcuts import render
-from principal.services.servicios import obtener_medicos_filtrados
+# from principal.services.servicios import obtener_medicos_filtrados
 # Create your views here.
 
 
@@ -18,6 +18,6 @@ def lista_medicos(request):
     institucion = request.GET.get('institucion')
     especialidad = request.GET.get('especialidad')
 
-    medicos = obtener_medicos_filtrados(localidad, institucion, especialidad)
-    return render(request, 'medicos/lista_medicos.html', {'medicos': medicos})
+    # medicos = obtener_medicos_filtrados(localidad, institucion, especialidad)
+    # return render(request, 'medicos/lista_medicos.html', {'medicos': medicos})
 

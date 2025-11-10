@@ -4,7 +4,6 @@ from django.contrib.auth.models import AbstractUser
 from django.core.validators import RegexValidator
 import os
 from django.conf import settings #importamos settings desde django.confs
-from principal.models import Localidad, GobiernoLocal
 
 # Create your models here.
 
@@ -38,9 +37,6 @@ class Medico(models.Model):
 
     #on_delete=models.SET_NULL si se borra la localidad, no borra al médico, solo deja el campo vacío.
     #null=True, blank=True permite editar el perfil sin forzar estos campos.
-
-    localidad = models.ForeignKey(Localidad, on_delete=models.SET_NULL, null=True, blank=True)
-    gobierno_local = models.ForeignKey(GobiernoLocal, on_delete=models.SET_NULL, null=True, blank=True)
 
 
 class Paciente(models.Model):

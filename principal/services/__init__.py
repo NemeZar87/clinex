@@ -1,1 +1,0 @@
-from .servicios import obtener_todas_localidades, obtener_todos_gobiernos_locales

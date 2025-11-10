@@ -10,13 +10,13 @@ from django.contrib.auth.decorators import login_required
 
 @login_required
 def crear_turno(request, year, month, day):
-    print("punto 0")
+    # print("punto 0")
     medico_id = 2  # reemplazar por request.session.get("medico_id")
     horario_query = get_object_or_404(HorarioTrabajo, pk=medico_id)
     medico = horario_query.medico
     paciente = get_object_or_404(Paciente, usuario=request.user)
     fecha = date(year, month, day)
-    print("punto 1")
+    # print("punto 1")
 
     # Generar turnos automáticamente si no existen
     # --- mapear weekday a texto con el formato de tus choices ---
@@ -39,38 +39,9 @@ def crear_turno(request, year, month, day):
         ctx = {"medico": medico, "fecha": fecha, "turnos": []}
         return render(request, "turno/crear_turno.html", ctx)
 
-    # --- helper para convertir a aware si es necesario ---
-    def make_aware_if_needed(dt):
-        if settings.USE_TZ:
-            if timezone.is_naive(dt):
-                return timezone.make_aware(dt, timezone.get_default_timezone())
-        return dt
 
     # --- Generar turnos para cada horario válido (si no existen) ---
-    for horario in horarios_validos:
-        inicio_dt = datetime.combine(fecha, horario.hora_inicio)
-        fin_dt = datetime.combine(fecha, horario.hora_fin)
-        inicio_dt = make_aware_if_needed(inicio_dt)
-        fin_dt = make_aware_if_needed(fin_dt)
-        intervalo = horario.tiempo_turno  # DurationField -> timedelta
-
-        # protección: si tiempo_turno es 0 o negativo, saltar
-        if not intervalo or intervalo.total_seconds() <= 0:
-            continue
-
-        # Generamos mientras que el turno completo entre dentro del intervalo
-        current = inicio_dt
-        while current + intervalo <= fin_dt:
-            # Usamos get_or_create: buscamos por médico + inicio (fecha-hora)
-            Turno.objects.get_or_create(
-                medico=medico,
-                inicio=current,
-                defaults={
-                    "fin": current + intervalo,
-                    "paciente_nombre": None
-                }
-            )
-            current += intervalo###
+    ###
 
     # Obtener los turnos libres de ese día
     turnos_disponibles = Turno.objects.filter(
@@ -79,7 +50,7 @@ def crear_turno(request, year, month, day):
         paciente_nombre__isnull=True
     ).order_by("inicio")
 
-    print("punto 2")
+    # print("punto 2")
     if request.method == "POST":
         turno_id = request.POST.get("turno_id")
         turno = get_object_or_404(Turno, id=turno_id)
@@ -87,9 +58,9 @@ def crear_turno(request, year, month, day):
         turno.save()
         return redirect("calendario")
 
-    print("punto 3")
-    print(medico)
-    print(horario_query)
+    # print("punto 3")
+    # print(medico)
+    # print(horario_query)
     
     ctx = {"medico": medico,
         "fecha": fecha,
@@ -105,6 +76,45 @@ def calendario(request):
     Muestra el calendario del mes actual para un médico previamente seleccionado.
     Solo muestra turnos dentro del mes actual.
     """
+    
+    def generador_turno(fecha, medico_var, weekday_text):
+
+        # --- helper para convertir a aware si es necesario ---
+        def make_aware_if_needed(dt):
+            if settings.USE_TZ:
+                if timezone.is_naive(dt):
+                    return timezone.make_aware(dt, timezone.get_default_timezone())
+            return dt
+
+
+        horarios_validos = HorarioTrabajo.objects.filter(medico=medico_var, dia=weekday_text)
+        
+        for horario in horarios_validos:
+            inicio_dt = datetime.combine(fecha, horario.hora_inicio)
+            fin_dt = datetime.combine(fecha, horario.hora_fin)
+            inicio_dt = make_aware_if_needed(inicio_dt)
+            fin_dt = make_aware_if_needed(fin_dt)
+            intervalo = horario.tiempo_turno  # DurationField -> timedelta
+
+            # protección: si tiempo_turno es 0 o negativo, saltar
+            if not intervalo or intervalo.total_seconds() <= 0:
+                continue
+
+            # Generamos mientras que el turno completo entre dentro del intervalo
+            current = inicio_dt
+            while current + intervalo <= fin_dt:
+                # Usamos get_or_create: buscamos por médico + inicio (fecha-hora)
+                Turno.objects.get_or_create(
+                    medico=medico_var,
+                    inicio=current,
+                    defaults={
+                        "fin": current + intervalo,
+                        "paciente_nombre": None
+                    }
+                )
+                current += intervalo
+
+    
     hoy = timezone.localdate()
     year = hoy.year
     month = hoy.month
@@ -148,6 +158,7 @@ def calendario(request):
         5: "sabado",
         6: "domingo",
     }
+
     semanas = monthcalendar(year, month)
     calendario = []
 
@@ -159,15 +170,15 @@ def calendario(request):
             else:
                 d = date(year, month, dia)
                 weekday_text = WEEKDAY_MAP[d.weekday()]
+                gen_turno = generador_turno(d, medico_var, weekday_text)
                 dicc_temp = {
                     "date": d,
                     "turnos": sorted(turnos_por_dia.get(d, []), key=lambda x: x.inicio)
                 }
 
+
+    
                 if weekday_text == dia_laboral:
-
-
-
                     #Verificamos si hay turnos libres en ese día
                     turno_libre= Turno.objects.filter(
                         medico=medico_var,
@@ -194,7 +205,11 @@ def calendario(request):
     # print(hora_inicio)
     # print(hora_fin)
     # print(weekday_text)
-    
+
+
+
+
+        
 
 
 

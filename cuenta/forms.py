@@ -8,14 +8,17 @@ class CrearCuenta(UserCreationForm):
         model = UsuarioPersonalizado
         fields = ["tipo_cuenta", "username", "first_name", "last_name", "fecha_nacimiento", "email", "telefono", "password1", "password2", "numero_dni", "foto_dni"]
         widgets = {
-            'telefono' : forms.NumberInput(attrs={
-                'oninput' : 'this.value = this.value.replace(/[^0-9]/g, '').slice(0,11);' # remplaza todos los caracteres que no sean numeros por nada y limita la cantidad de caracteres que puedes colocar a 11.
+            'telefono': forms.NumberInput(attrs={
+                'oninput': 'this.value = this.value.replace(/[^0-9]/g, '').slice(0,11);', # remplaza todos los caracteres que no sean numeros por nada y limita la cantidad de caracteres que puedes colocar a 11.
+                'placeholder': 'Número de telefono'
             }),
-            'numero_dni' : forms.NumberInput(attrs={
-                'oninput' : 'this.value = this.value.replace(/[^0-9]/g, '').slice(0,8);'
+            'numero_dni': forms.NumberInput(attrs={
+                'oninput': 'this.value = this.value.replace(/[^0-9]/g, '').slice(0,8);',
+                'placeholder': 'Número de documento'
             }),
             'fecha_nacimiento': forms.DateInput(attrs={
-                "type": "date", "max": timezone.localdate().isoformat()
+                "type": "date",
+                "max": timezone.localdate().isoformat()
             }),
         }
 

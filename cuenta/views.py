@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
-from .forms import CrearCuenta, InicioSesion, HorarioTrabajoForm, LugarTrabajoForm
-from cuenta.services.servicios import crear_cuenta, iniciar_sesion, cerrar_sesion, medico_required, actualizar_perfil_medico, obtener_datos_configuracion_medica
+from .forms import CrearCuenta, InicioSesion
+from cuenta.services.servicios import crear_cuenta, iniciar_sesion, cerrar_sesion, medico_required
 from .services.lector_dni import lector_total
-from principal.services.servicios import guardar_localidades, obtener_todas_localidades, obtener_todos_gobiernos_locales
+# from principal.services.servicios import guardar_localidades, obtener_todas_localidades, obtener_todos_gobiernos_locales
 
 def crear_cuenta_view(request):
     if request.method == "POST":
@@ -21,7 +21,7 @@ def crear_cuenta_view(request):
             # elif lector == False:
             #     ctx = {
             #     "form" : form,
-            #     "errors" : "❌ Error: Los datos ingresados no coinciden con lo leido. Vuelva a intentarlo."
+            #     "errors" : "Error: Los datos ingresados no coinciden con lo leido. Vuelva a intentarlo."
             #     }
             #     return render(request, "cuenta/registro.html", ctx)
         else:
