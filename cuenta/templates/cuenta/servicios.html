@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block css_secundario %}
+<link rel="stylesheet" href="{% static 'cuenta/servicios' %}">
+{% endblock %}
+
+{% block main %}
+<h1>Que es Clinex?</h1>
+<p>Clinex es una plataforma medica digital para facilitar la conexion entre pacientes y profecionales de la salud.
+Nuestro objetivo es mejorar la atencion medica a traves de herramientas simples, seguras y accesibles desde cualquier dispositivo</p>
+
+<h1>Nuestros servicios</h1>
+
+<h2>Gestion de turnos online</h2>
+<p>solicita, modifica o cancela tus turnos de manera rapida y sin necesidad de hacer llamadas.
+Elegi el dia, horario y profesional desde tu cuenta</p>
+
+<h2>Panel medico personalizado</h2>
+<p>los profesionales pueden acceder a su agenda, administrar pacientes, registrar consultas y actualizar la historia clinica en tiempo real.</p>
+
+<h2>Historia clinica digital</h2>
+<p>conserva tu informacion medica siempre disponible y actualizada.
+los medicos autorizados pueden consultar tus antecedentes para poder ofrecer un mejor diagnostico</p>
+
+<h2>Gestion administrativa</h2>
+<p>Autoriza procesos internos como registros de usuarios, control de turnos y reportes medicos, todo desde un mismo panel centralizado.</p>
+
+<h2>Seguridad y confidencialidad</h2>
+<p>Tus datos personales y medicos estan protegidos con protocolos a nivel profesional y cumpliendo con las normativas de protecccion de datos</p>
+
+<h1>Porque elegir nuestros servicios?</h1>
+<ul>
+    <li>ahorro de tiempo y reduccion de errores administrativos</li>
+    <li>Acceso remoto a tus turnos y a tu historia medica</li>
+    <li>Comunicacion directa con tu medico o clinica</li>
+    <li>interfaz intuitiva y adaptable a cualquier tipo de usuario</li>
+</ul>
+{% endblock %}

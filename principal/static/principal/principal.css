@@ -1,0 +1,49 @@
+.barra_lateral {
+    width: 250px;
+    background-color: #f0f0f0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* espacio entre li */
+    min-height: 100vh;
+    margin-left: auto;
+    position: fixed;
+    right: 0;
+}
+
+.panel-medico h2 {
+    text-align: center;
+    background-color: #ccc;
+}
+
+.medico {
+    border: 2px solid #ccc;
+    width: 100%;
+}
+
+.panel-medico a {
+    width: 30%;
+}
+
+.panel-medico {
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    width: 80%;
+    margin-top: 2em;
+}
+
+.ul-medicos {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.pagina {
+    display: flex;
+    justify-content: center;
+}
+
+.div_contenedor {
+    display: grid;
+    grid-template-columns: 1fr 230px;
+    gap: 20px;
+}

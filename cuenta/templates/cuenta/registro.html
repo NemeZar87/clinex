@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+{% load static %}
+    {% block css_secundario %}
+    <link rel="stylesheet" href="{% static 'cuenta/registro.css' %}">
+    {% endblock %}
+    {% block titulo %}
+    <title>Crear cuenta</title>
+    {% endblock %}
+</head>
+<body>
+    {% block main %}
+        <form method="post", enctype="multipart/form-data">
+            <h2>
+                Crear cuenta
+            </h2>
+            <fieldset>
+                <div class="campos">
+                    {% if form.errors %}
+                    <div class="errores">
+                        {% for field, errors in form.errors.items %}
+                        <p><strong>{{ field }}</strong>:
+                            {% for error in errors %}
+                            {{ error }}
+                            {% endfor %}    
+                        </p>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                    {% csrf_token %}
+                    <div class="campo">
+                        <select name="tipo_cuenta" id="id_tipo_cuenta">
+                            <option value="" selected disabled>Tipo de cuenta</option>
+                            <option value="paciente">Paciente</option>
+                            <option value="medico">Medico</option>
+                        </select>
+                    </div>
+                    <div class="campo">
+                        <input type="text" name="username" placeholder="Nombre de usuario" maxlength="150" aria-describedby="id_username_helptext" id="id_username" required>
+                        <!-- recorre el form q es un diccionario y busca errores en el campo username -->
+                        {% for error in form.username.errors %}
+                        <span class="error">{{ error }}</span> <!-- Muestra errores específicos del campo -->
+                        {% endfor %}
+                    </div>
+                    <div id="nombre-apellido">
+                        <input type="text" name="first_name" placeholder="Nombre" maxlength="150" id="id_first_name" required>
+                        {% for error in form.first_name.errors %}
+                        <span class="error">{{ error }}</span>
+                        {% endfor %}
+                        
+                        <input type="text" name="last_name" id="id_last_name" placeholder="Apellido" required>
+                        {% for error in form.last_name.errors %}
+                        <span class="error">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    <div class="campo">
+                        <label for="{{ form.fecha_nacimiento.id_for_label }}">Fecha de nacimiento</label>
+                        {{ form.fecha_nacimiento }}
+                        {% for error in form.fecha_nacimiento.errors %}
+                        <span class="error">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    <div class="campo">
+                        <input type="email" name="email" id="id_email" maxlength="254" placeholder="Correo electronico" required>
+                        {% for error in form.email.errors %}
+                        <span class="error">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    <div class="campo">
+                        <input type="number" name="telefono" id="id_telefono" placeholder="Número de telefono">
+                        {% for error in form.telefono.errors %}
+                        <span class="error">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    <div class="campo">
+                        <input type="password" name="password1" id="id_password1" placeholder="Contraseña" required>
+                        {% for error in form.password1.errors %}
+                        <span class="error">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    <div class="campo">
+                        <input type="password" name="password2" id="id_password2" placeholder="Confirmar contraseña" required>
+                        {% for error in form.password2.errors %}
+                        <span class="error">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    <div class="campo">
+                        <input type="number" name="numero_dni" id="id_numero_dni" placeholder="Número de documento" required>
+                        {% for error in form.numero_dni.errors %}
+                        <span class="error">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    <div class="campo">
+                        <label for="{{ form.foto_dni.id_for_label }}">Foto del DNI</label>
+                        {{ form.foto_dni }}
+                        {% for error in form.foto_dni.errors %}
+                        <span class="error">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    <button type="submit">Registrarse</button>
+                </div>
+            </fieldset>
+        </form>
+    {% endblock %}
+</body>
+</html>
+
+

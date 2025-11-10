@@ -1,0 +1,2 @@
+from .repositorio import obtener_medico_por_usuario, actualizar_localizacion_medico
+from . import repositorio

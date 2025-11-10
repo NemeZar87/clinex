@@ -1,0 +1,59 @@
+from django import forms
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from .models import UsuarioPersonalizado, HorarioTrabajo, LugarTrabajo
+from django.utils import timezone
+
+class CrearCuenta(UserCreationForm):
+    class Meta:
+        model = UsuarioPersonalizado
+        fields = ["tipo_cuenta", "username", "first_name", "last_name", "fecha_nacimiento", "email", "telefono", "password1", "password2", "numero_dni", "foto_dni"]
+        widgets = {
+            'telefono' : forms.NumberInput(attrs={
+                'oninput' : 'this.value = this.value.replace(/[^0-9]/g, '').slice(0,11);' # remplaza todos los caracteres que no sean numeros por nada y limita la cantidad de caracteres que puedes colocar a 11.
+            }),
+            'numero_dni' : forms.NumberInput(attrs={
+                'oninput' : 'this.value = this.value.replace(/[^0-9]/g, '').slice(0,8);'
+            }),
+            'fecha_nacimiento': forms.DateInput(attrs={
+                "type": "date", "max": timezone.localdate().isoformat()
+            }),
+        }
+
+class InicioSesion(AuthenticationForm):
+    username = forms.CharField(label="Usuario")
+    password = forms.CharField(widget=forms.PasswordInput, label="Contraseña")
+
+class HorarioTrabajoForm(forms.ModelForm):
+    class Meta:
+        model = HorarioTrabajo
+        fields = ['lugar', 'dia', 'hora_inicio', 'hora_fin', 'tiempo_turno']
+        widgets = {
+            'hora_inicio': forms.TimeInput(
+                format='%H:%M',
+                attrs={'type': 'time'}
+            ),
+            'hora_fin': forms.TimeInput(
+                format='%H:%M',
+                attrs={'type': 'time'}
+            ),
+            'tiempo_turno': forms.TimeInput(
+                format='%H:%M:%S',
+                attrs={'type': 'time', 'step': 1, 'title': 'Duración entre turnos (HH:MM:SS)'}# 👈 muestra segundos
+            ),
+        }
+    
+    def __init__(self, *args, **kwargs):
+        medico = kwargs.pop('medico', None)
+        super().__init__(*args, **kwargs)
+        if medico:
+            self.fields['lugar'].queryset = medico.lugares.all()
+
+class LugarTrabajoForm(forms.ModelForm):
+    class Meta:
+        model = LugarTrabajo
+        fields = ['nombre', 'direccion', 'telefono']
+        widgets = {
+            'telefono' : forms.NumberInput(attrs={
+                'oninput' : 'this.value = this.value.replace(/[^0-9]/g, '').slice(0,11);' # remplaza todos los caracteres que no sean numeros por nada y limita la cantidad de caracteres que puedes colocar a 11.
+            })
+        }

@@ -1,0 +1,11 @@
+.ul_contenedor2 {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    list-style: none;
+    gap: 15px;
+}
+
+#seleccionado {
+    color: #ddd;
+}

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+    {% block titulo %}
+    <title>Inicio sesion</title>
+    {% endblock %}
+</head>
+<body>
+    {% block header %}
+    {% endblock %}
+    {% block main %}
+    <form method="post">
+        <fieldset>
+            <legend>
+                Inicio sesión
+            </legend>
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Iniciar sesión">
+        </fieldset>
+    </form>
+    {% endblock %}
+</body>
+</html>

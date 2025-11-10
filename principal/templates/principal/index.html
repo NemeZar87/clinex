@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block css_secundario %}
+<link rel="stylesheet" href="{% static 'principal/principal.css' %}">
+{% endblock %}
+
+{% block main %}
+
+<div class="div_contenedor">
+
+    <!-- BARRA LATERAL -->
+    <aside class="barra_lateral">
+        <h2>Panel de publicidad y noticias</h2>
+        <ul>
+            <li>Agrega anuncio aquí</li>
+            <li>Agrega anuncio aquí</li>
+            <li>Agrega anuncio aquí</li>
+            <li>Agrega anuncio aquí</li>
+            <li>Agrega anuncio aquí</li>
+        </ul>
+    </aside>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <div class="pagina">
+        <div class="panel-medico">
+            <h2>Lista de Médicos</h2>
+
+            <!--FORMULARIO DE FILTRO -->
+            <form method="get" class="form-filtro">
+                <div class="campo-filtro">
+                    <label for="localidad">Localidad:</label>
+                    <input type="text" name="localidad" id="localidad" value="{{ request.GET.localidad }}">
+                </div>
+
+                <div class="campo-filtro">
+                    <label for="institucion">Institución:</label>
+                    <input type="text" name="institucion" id="institucion" value="{{ request.GET.institucion }}">
+                </div>
+
+                <div class="campo-filtro">
+                    <label for="especialidad">Especialidad:</label>
+                    <select name="especialidad" id="especialidad">
+                        <option value="">-- Todas --</option>
+                        <option value="medico-clinico" {% if request.GET.especialidad == 'medico-clinico' %}selected{% endif %}>Médico Clínico</option>
+                        <option value="traumatologo" {% if request.GET.especialidad == 'traumatologo' %}selected{% endif %}>Traumatólogo</option>
+                        <option value="dentista" {% if request.GET.especialidad == 'dentista' %}selected{% endif %}>Dentista</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn-filtrar">Filtrar</button>
+            </form>
+
+            <!--LISTA DE MÉDICOS -->
+            <ul class="ul-medicos">
+                {% for m in medicos %}
+                    <a href="#">
+                        <li class="medico">
+                            <span class="resaltado">{{ m.usuario.first_name }} {{ m.usuario.last_name }}</span><br>
+                            <strong>{{ m.get_especialidad_display }}</strong><br>
+
+                            {% for horario in m.horario.all %}
+                                <small>{{ horario.lugar.nombre }} ({{ horario.lugar.direccion }})</small><br>
+                            {% endfor %}
+                        </li>
+                    </a>
+                {% empty %}
+                    <li>No hay médicos registrados o no coinciden con el filtro.</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block div %}{% endblock %}

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block main %}
+<h2>Turnos disponibles el {{ fecha }} con {{ medico.usuario.first_name }}</h2>
+
+<form method="post">
+    {% csrf_token %}
+    {% for turno in turnos %}
+        <div>
+            <input type="radio" name="turno_id" value="{{ turno.id }}" id="turno{{ turno.id }}">
+            <label for="turno{{ turno.id }}">{{ turno.inicio|time:"H:i" }}</label>
+        </div>
+    {% empty %}
+        <p>No hay turnos disponibles este día.</p>
+    {% endfor %}
+    <button type="submit">Confirmar turno</button>
+</form>
+{% endblock %}

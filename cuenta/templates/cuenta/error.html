@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    {% if form.errors %}
+        <div class="errores">
+            {% for field, errors in form.errors.items %}
+                <p><strong>{{ field }}</strong>:
+                    {% for error in errors %}
+                        {{ error }}
+                    {% endfor %}
+                </p>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+        <button type="submit">Crear cuenta</button>
+    </form>
+
+</body>
+</html>
