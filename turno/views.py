@@ -2,9 +2,9 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from django.conf import settings
 from datetime import date, datetime, timedelta
-from calendar import monthrange, monthcalendar, calendar
+from calendar import monthrange, monthcalendar
 from .models import Turno
-from cuenta.models import Medico, Paciente, HorarioTrabajo
+from cuenta.models import Paciente, HorarioTrabajo
 from django.contrib.auth.decorators import login_required
 
 
@@ -114,6 +114,15 @@ def calendario(request):
                 )
                 current += intervalo
 
+    WEEKDAY_MAP = {
+        0: "lunes",
+        1: "martes",
+        2: "miercoles",
+        3: "jueves",
+        4: "viernes",
+        5: "sabado",
+        6: "domingo",
+    }
     
     hoy = timezone.localdate()
     year = hoy.year
@@ -149,16 +158,6 @@ def calendario(request):
         turnos_por_dia.setdefault(key, []).append(t)
 
     # Crear la estructura de semanas del mes
-    WEEKDAY_MAP = {
-        0: "lunes",
-        1: "martes",
-        2: "miercoles",
-        3: "jueves",
-        4: "viernes",
-        5: "sabado",
-        6: "domingo",
-    }
-
     semanas = monthcalendar(year, month)
     calendario = []
 

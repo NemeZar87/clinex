@@ -7,9 +7,15 @@ from django.shortcuts import render
 
 
 def index(request):
-    medicos = UsuarioPersonalizado.objects.filter(tipo_cuenta='medico')
+    print("test")
+    medicos_qs = UsuarioPersonalizado.objects.filter(tipo_cuenta='medico')
+    print(medicos_qs)
+
+    for j in medicos_qs:
+        print(f"JOTA: {j}")
+
     ctx = {
-        "medicos": medicos,
+        "medicos": medicos_qs,
     }
     return render(request, "principal/index.html", ctx)
 
@@ -20,4 +26,5 @@ def lista_medicos(request):
 
     # medicos = obtener_medicos_filtrados(localidad, institucion, especialidad)
     # return render(request, 'medicos/lista_medicos.html', {'medicos': medicos})
+
 

@@ -27,7 +27,7 @@
                         {% for celda in semana %}
                             {% if celda.date %}
                                 <td style="vertical-align: top; text-align: center; background-color: {{ celda.color }}">
-                                    <a href="{% url 'crear_turno' celda.date.year celda.date.month celda.date.day %}">
+                                    <a href="{% url 'turno:crear_turno' celda.date.year celda.date.month celda.date.day %}">
                                         <strong>{{ celda.date.day }}</strong>
                                     </a>
                                     <br>

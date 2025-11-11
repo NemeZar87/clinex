@@ -28,26 +28,25 @@
                     {% endif %}
                     {% csrf_token %}
                     <div class="campo">
-                        <select name="tipo_cuenta" id="id_tipo_cuenta">
+                        <select name="{{ form.tipo_cuenta.name }}" id="{{ form.tipo_cuenta.id_for_label }}">
                             <option value="" selected disabled>Tipo de cuenta</option>
                             <option value="paciente">Paciente</option>
                             <option value="medico">Medico</option>
                         </select>
                     </div>
                     <div class="campo">
-                        <input type="text" name="username" id="id_username" placeholder="Nombre de usuario" maxlength="150" aria-describedby="id_username_helptext" required>
+                        {{ form.username }}
                         <!-- recorre el form q es un diccionario y busca errores en el campo username -->
                         {% for error in form.username.errors %}
                         <span class="error">{{ error }}</span> <!-- Muestra errores específicos del campo -->
                         {% endfor %}
                     </div>
                     <div id="nombre-apellido">
-                        <input type="text" name="first_name" id="id_first_name" placeholder="Nombre" maxlength="150" required>
+                        {{ form.first_name }}
                         {% for error in form.first_name.errors %}
                         <span class="error">{{ error }}</span>
                         {% endfor %}
-                        
-                        <input type="text" name="last_name" id="id_last_name" placeholder="Apellido" required>
+                        {{ form.last_name }}
                         {% for error in form.last_name.errors %}
                         <span class="error">{{ error }}</span>
                         {% endfor %}
@@ -60,7 +59,7 @@
                         {% endfor %}
                     </div>
                     <div class="campo">
-                        <input type="email" name="email" id="id_email" maxlength="254" placeholder="Correo electronico" required>
+                        {{ form.email }}
                         {% for error in form.email.errors %}
                         <span class="error">{{ error }}</span>
                         {% endfor %}
@@ -72,13 +71,13 @@
                         {% endfor %}
                     </div>
                     <div class="campo">
-                        <input type="password" name="password1" id="id_password1" placeholder="Contraseña" required>
+                        {{ form.password1 }}
                         {% for error in form.password1.errors %}
                         <span class="error">{{ error }}</span>
                         {% endfor %}
                     </div>
                     <div class="campo">
-                        <input type="password" name="password2" id="id_password2" placeholder="Confirmar contraseña" required>
+                        {{ form.password2 }}
                         {% for error in form.password2.errors %}
                         <span class="error">{{ error }}</span>
                         {% endfor %}

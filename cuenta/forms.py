@@ -4,10 +4,37 @@ from .models import UsuarioPersonalizado, HorarioTrabajo, LugarTrabajo
 from django.utils import timezone
 
 class CrearCuenta(UserCreationForm):
+    password1 = forms.CharField(
+        widget=forms.PasswordInput(attrs={
+            'placeholder': 'Contraseña'
+        })
+    )
+    password2 = forms.CharField(
+        widget=forms.PasswordInput(attrs={
+            'placeholder': 'Confirmar contraseña'
+        })
+    )
+
     class Meta:
         model = UsuarioPersonalizado
         fields = ["tipo_cuenta", "username", "first_name", "last_name", "fecha_nacimiento", "email", "telefono", "password1", "password2", "numero_dni", "foto_dni"]
         widgets = {
+            'username': forms.TextInput(attrs={
+                'placeholder': 'Nombre de usuario'
+            }),
+            'first_name': forms.TextInput(attrs={
+                'placeholder': 'Nombre completo'
+            }),
+            'last_name': forms.TextInput(attrs={
+                'placeholder': 'Apellido completo'
+            }),
+            'fecha_nacimiento': forms.DateInput(attrs={
+                "type": "date",
+                "max": timezone.localdate().isoformat()
+            }),
+            'email': forms.EmailInput(attrs={
+                'placeholder': 'Correo electronico'
+            }),
             'telefono': forms.NumberInput(attrs={
                 'oninput': 'this.value = this.value.replace(/[^0-9]/g, '').slice(0,11);', # remplaza todos los caracteres que no sean numeros por nada y limita la cantidad de caracteres que puedes colocar a 11.
                 'placeholder': 'Número de telefono'
@@ -15,10 +42,6 @@ class CrearCuenta(UserCreationForm):
             'numero_dni': forms.NumberInput(attrs={
                 'oninput': 'this.value = this.value.replace(/[^0-9]/g, '').slice(0,8);',
                 'placeholder': 'Número de documento'
-            }),
-            'fecha_nacimiento': forms.DateInput(attrs={
-                "type": "date",
-                "max": timezone.localdate().isoformat()
             }),
         }
 
