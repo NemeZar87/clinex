@@ -1,17 +1,17 @@
 {% extends "base.html" %}
 {% load static %}
 {% block css_secundario %}
-    <link rel="stylesheet" href="{% static 'cuenta/inicio_sesion' %}">
+<link rel="stylesheet" href="{% static 'cuenta/inicio_sesion.css' %}">
 {% endblock %}
 {% block titulo %}
 <title>Inicio sesion</title>
 {% endblock %}
 {% block main %}
 <form method="post">
+    <h2>
+        Iniciar sesión
+    </h2>
     <fieldset>
-        <h2>
-            Iniciar sesión
-        </h2>
         {% csrf_token %}
         {{ form.username }}
         {{ form.password }}

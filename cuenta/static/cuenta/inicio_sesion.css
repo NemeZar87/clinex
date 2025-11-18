@@ -1,0 +1,27 @@
+form {
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+fieldset {
+    width: 350pt;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+input {
+    width: 80%;
+    height: 35pt;
+    margin-top: 5pt;
+    margin-bottom: 5pt;
+}
+
+button {
+    width: 40%;
+    height: 35pt;
+}
