@@ -1,6 +1,6 @@
 #############################################################################
 # Nombre: gi
-# Fecha de creación: 
+# Fecha de creación:
 # Comentario:
 # 
 # Ultima fecha de modificación:

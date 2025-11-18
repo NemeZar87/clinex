@@ -1,13 +1,10 @@
 {% extends "base.html" %}
+{% load static %}
     {% block css_secundario %}
-    <link rel="stylesheet" href="{% static 'principal/' %}">
+    <link rel="stylesheet" href="{% static 'cuenta/inicio_sesion.css' %}">
     {% endblock %}
     {% block titulo %}
     <title>Inicio sesion</title>
-    {% endblock %}
-</head>
-<body>
-    {% block header %}
     {% endblock %}
     {% block main %}
     <form method="post">
@@ -22,5 +19,3 @@
         </fieldset>
     </form>
     {% endblock %}
-</body>
-</html>
