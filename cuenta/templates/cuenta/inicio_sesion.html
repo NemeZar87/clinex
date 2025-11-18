@@ -1,26 +1,21 @@
 {% extends "base.html" %}
-    {% block css_secundario %}
-    <link rel="stylesheet" href="{% static 'principal/' %}">
-    {% endblock %}
-    {% block titulo %}
-    <title>Inicio sesion</title>
-    {% endblock %}
-</head>
-<body>
-    {% block header %}
-    {% endblock %}
-    {% block main %}
-    <form method="post">
-        <fieldset>
-            <h2>
-                Iniciar sesión
-            </h2>
-            {% csrf_token %}
-            {{ form.username }}
-            {{ form.password }}
-            <button type="submit">Iniciar sesion</button>
-        </fieldset>
-    </form>
-    {% endblock %}
-</body>
-</html>
+{% load static %}
+{% block css_secundario %}
+    <link rel="stylesheet" href="{% static 'cuenta/inicio_sesion' %}">
+{% endblock %}
+{% block titulo %}
+<title>Inicio sesion</title>
+{% endblock %}
+{% block main %}
+<form method="post">
+    <fieldset>
+        <h2>
+            Iniciar sesión
+        </h2>
+        {% csrf_token %}
+        {{ form.username }}
+        {{ form.password }}
+        <button type="submit">Iniciar sesion</button>
+    </fieldset>
+</form>
+{% endblock %}

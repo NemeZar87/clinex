@@ -233,6 +233,3 @@ def turno(request):
 #Falta que medico_id sea traido desde request (se lo mandariamos nosotros cuando el usuario clickea en el medico que desea ver sus horario.)
 #Actualmente el programar esta puesto como version de prueba en id de medico = 2 pero es fijo, no sirve.
 #atte: Chino (anotaciones mias)
-
-#asddd
-#basura 1234

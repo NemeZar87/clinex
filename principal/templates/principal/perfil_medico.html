@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block main %}
+    <h1> {{ medico.usuario.first_name }} </h1>
+    <p> {{ medico.especialidad }} </p>
+    <hr>
+    {% for j in lugares %}
+        <p> {{ j.insti }} </p>
+        <p> {{ j.direc }} </p>
+        <p> {{ j.tel }} </p>
+        <hr>
+    {% endfor %}
+    <a href="{% url 'turno:calendario' %}"> calendario</a>
+{% endblock %}
+
