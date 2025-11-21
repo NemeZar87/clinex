@@ -2,6 +2,7 @@
 {% load static %}
 
 {% block css_secundario %}
+<link rel="stylesheet" href="{% static 'cuenta/turnos.css' %} ">
 <link rel="stylesheet" href="{% static 'cuenta/compartido.css' %}">
 <link rel="stylesheet" href="{% static 'cuenta/config_perfil.css' %}">
 {% endblock %}
@@ -23,6 +24,39 @@
 
     </ul>
     
+
+    <main>
+        <h2>Turnos reservados</h2>
+        <table border="1" cellspacing="0" cellpadding="10" align="center">
+            <thead>
+                <tr>
+                    <th>Medico</th>
+                    <th>Dia</th>
+                    <th>Hora</th>
+                    <th>Atendido</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                {% for j in turnos %}
+                <tr>
+                    {% if j.medico %}
+                    <td>{{ j.medico.usuario.first_name }}</td>
+                    {% endif %}
+                    {% if j.fecha %}
+                    <td>{{ j.fecha.date }}</td>
+                    <td>{{ j.fecha.time }}</td>
+                    {% endif %}
+                    <td>True/False</td>
+                </tr>
+                <div>
+                </div>
+            </tbody>
+                {% endfor %}
+        </table>
+        
+    </main>
+
     {% if errors %}
         <p>{ errors.error }</p>        
     {% endif %}

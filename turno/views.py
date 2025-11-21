@@ -56,7 +56,7 @@ def crear_turno(request, year, month, day):
         turno = get_object_or_404(Turno, id=turno_id)
         turno.paciente_nombre = paciente.usuario
         turno.save()
-        return redirect("calendario")
+        return redirect("turno:calendario")
 
     # print("punto 3")
     # print(medico)
@@ -122,6 +122,20 @@ def calendario(request):
         4: "viernes",
         5: "sabado",
         6: "domingo",
+    }
+    MESES_MAP = {
+        1: "Enero",
+        2: "Febrero",
+        3: "Marzo",
+        4: "Abril",
+        5: "Mayo",
+        6: "Junio",
+        7: "Julio",
+        8: "Agosto",
+        9: "Septiembre",
+        10: "Octubre",
+        11: "Noviembre",
+        12: "Diciembre",
     }
     
     hoy = timezone.localdate()
@@ -204,21 +218,14 @@ def calendario(request):
     # print(hora_inicio)
     # print(hora_fin)
     # print(weekday_text)
-
-
-
-
-        
-
-
+    mes = MESES_MAP[month]
 
     context = {
         "calendario": calendario,
         "dia": dia_laboral,       
-        "inicio": hora_inicio,       
-        "fin": hora_fin,       
-        "year": year,
-        "month": month,
+        "inicio": hora_inicio,
+        "mes": mes,       
+        "fin": hora_fin,
         "medico": medico_var,
     }
 

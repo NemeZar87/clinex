@@ -28,7 +28,7 @@ def lista_medicos(request):
     # return render(request, 'medicos/lista_medicos.html', {'medicos': medicos})
 
 def perfil_medico(request):
-    medico_id = 2 #esto tiene que llegar de los filtos, solo sirve para pruebas.
+    medico_id = 1 #esto tiene que llegar de los filtos, solo sirve para pruebas.
     medico_qs = HorarioTrabajo.objects.filter(medico_id=medico_id) #agregar filtro por depto
     lista_medico = list(medico_qs)
     medico_all = lista_medico[0].medico
@@ -41,22 +41,12 @@ def perfil_medico(request):
             "tel" : lugar_all.telefono,
         }
         lugares.append(dicc_temp)
-
-
     # print(lugares)
-
     ctx = {
         "medico" : medico_all,
         "lugares" : lugares,
     }
     return render(request, "principal/perfil_medico.html", ctx)
-
-
-
-
-
-
-
 
     # {{ for lugar in lugares }}
     #     {{ for j in lugar }}
