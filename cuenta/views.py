@@ -74,17 +74,15 @@ def turnos_view(request):
         }
         todo.append(temp)
     
+    if todo:
+        reserva = True
+    else:
+        reserva = False
+    
     ctx = {
-        "turnos": todo 
+        "turnos": todo,
+        "reserva": reserva,
     }
-
-
-    for j in todo:
-            print(j)
-            if j["medico"]:
-                print(j["medico"].usuario.first_name)
-            if j["fecha"]:
-                print(j["fecha"])
     return render(request, "cuenta/turnos.html", ctx)
 
 def historia_clinica_view(request):

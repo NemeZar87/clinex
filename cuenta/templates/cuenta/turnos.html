@@ -27,6 +27,7 @@
 
     <main>
         <h2>Turnos reservados</h2>
+        {% if reserva %}
         <table border="1" cellspacing="0" cellpadding="10" align="center">
             <thead>
                 <tr>
@@ -40,21 +41,22 @@
 
                 {% for j in turnos %}
                 <tr>
-                    {% if j.medico %}
+                    {% if j.medico and j.fecha %}
                     <td>{{ j.medico.usuario.first_name }}</td>
-                    {% endif %}
-                    {% if j.fecha %}
                     <td>{{ j.fecha.date }}</td>
                     <td>{{ j.fecha.time }}</td>
+                    {% else %}
+                    <p></p>
                     {% endif %}
                     <td>True/False</td>
                 </tr>
-                <div>
-                </div>
-            </tbody>
                 {% endfor %}
+            </tbody>
         </table>
-        
+        {% else %}
+            <p>Usted no ha reservado turnos</p>
+        {% endif %}
+
     </main>
 
     {% if errors %}
