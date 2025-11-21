@@ -1,107 +1,102 @@
 {% extends "base.html" %}
 {% load static %}
-    {% block css_secundario %}
-    <link rel="stylesheet" href="{% static 'cuenta/registro.css' %}">
-    {% endblock %}
-    {% block titulo %}
-    <title>Crear cuenta</title>
-    {% endblock %}
-</head>
-<body>
-    {% block main %}
-    abcdefghijklmnñopqrstuvwxyz
-        <form method="post", enctype="multipart/form-data">
-            <h2>
-                Crear cuenta
-            </h2>
-            <fieldset>
-                <div class="campos">
-                    {% if form.errors %}
-                    <div class="errores">
-                        {% for field, errors in form.errors.items %}
-                        <p><strong>{{ field }}</strong>:
-                            {% for error in errors %}
-                            {{ error }}
-                            {% endfor %}    
-                        </p>
-                        {% endfor %}
-                    </div>
-                    {% endif %}
-                    {% csrf_token %}
-                    <div class="campo">
-                        <select name="{{ form.tipo_cuenta.name }}" id="{{ form.tipo_cuenta.id_for_label }}">
-                            <option value="" selected disabled>Tipo de cuenta</option>
-                            <option value="paciente">Paciente</option>
-                            <option value="medico">Medico</option>
-                        </select>
-                    </div>
-                    <div class="campo">
-                        {{ form.username }}
-                        <!-- recorre el form q es un diccionario y busca errores en el campo username -->
-                        {% for error in form.username.errors %}
-                        <span class="error">{{ error }}</span> <!-- Muestra errores específicos del campo -->
-                        {% endfor %}
-                    </div>
-                    <div id="nombre-apellido">
-                        {{ form.first_name }}
-                        {% for error in form.first_name.errors %}
-                        <span class="error">{{ error }}</span>
-                        {% endfor %}
-                        {{ form.last_name }}
-                        {% for error in form.last_name.errors %}
-                        <span class="error">{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                    <div class="campo">
-                        <label for="{{ form.fecha_nacimiento.id_for_label }}">Fecha de nacimiento</label>
-                        {{ form.fecha_nacimiento }}
-                        {% for error in form.fecha_nacimiento.errors %}
-                        <span class="error">{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                    <div class="campo">
-                        {{ form.email }}
-                        {% for error in form.email.errors %}
-                        <span class="error">{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                    <div class="campo">
-                        {{ form.telefono }}
-                        {% for error in form.telefono.errors %}
-                        <span class="error">{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                    <div class="campo">
-                        {{ form.password1 }}
-                        {% for error in form.password1.errors %}
-                        <span class="error">{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                    <div class="campo">
-                        {{ form.password2 }}
-                        {% for error in form.password2.errors %}
-                        <span class="error">{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                    <div class="campo">
-                        {{ form.numero_dni }}
-                        {% for error in form.numero_dni.errors %}
-                        <span class="error">{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                    <div class="campo">
-                        <label for="{{ form.foto_dni.id_for_label }}">Foto del DNI</label>
-                        {{ form.foto_dni }}
-                        {% for error in form.foto_dni.errors %}
-                        <span class="error">{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                    <button type="submit">Registrarse</button>
-                </div>
-            </fieldset>
-        </form>
-    {% endblock %}
-</body>
-</html>
+{% block css_secundario %}
+<link rel="stylesheet" href="{% static 'cuenta/registro.css' %}">
+{% endblock %}
+{% block titulo %}
+<title>Crear cuenta</title>
+{% endblock %}
+{% block main %}
+<form method="post", enctype="multipart/form-data">
+    <h2>
+        Crear cuenta
+    </h2>
+    <fieldset>
+        <div class="campos">
+            {% if form.errors %}
+            <div class="errores">
+                {% for field, errors in form.errors.items %}
+                <p><strong>{{ field }}</strong>:
+                    {% for error in errors %}
+                    {{ error }}
+                    {% endfor %}    
+                </p>
+                {% endfor %}
+            </div>
+            {% endif %}
+            {% csrf_token %}
+            <div class="campo">
+                <select name="{{ form.tipo_cuenta.name }}" id="{{ form.tipo_cuenta.id_for_label }}">
+                    <option value="" selected disabled>Tipo de cuenta</option>
+                    <option value="paciente">Paciente</option>
+                    <option value="medico">Medico</option>
+                </select>
+            </div>
+            <div class="campo">
+                {{ form.username }}
+                <!-- recorre el form q es un diccionario y busca errores en el campo username -->
+                {% for error in form.username.errors %}
+                <span class="error">{{ error }}</span> <!-- Muestra errores específicos del campo -->
+                {% endfor %}
+            </div>
+            <div id="nombre-apellido">
+                {{ form.first_name }}
+                {% for error in form.first_name.errors %}
+                <span class="error">{{ error }}</span>
+                {% endfor %}
+                {{ form.last_name }}
+                {% for error in form.last_name.errors %}
+                <span class="error">{{ error }}</span>
+                {% endfor %}
+            </div>
+            <div class="campo">
+                <label for="{{ form.fecha_nacimiento.id_for_label }}">Fecha de nacimiento</label>
+                {{ form.fecha_nacimiento }}
+                {% for error in form.fecha_nacimiento.errors %}
+                <span class="error">{{ error }}</span>
+                {% endfor %}
+            </div>
+            <div class="campo">
+                {{ form.email }}
+                {% for error in form.email.errors %}
+                <span class="error">{{ error }}</span>
+                {% endfor %}
+            </div>
+            <div class="campo">
+                {{ form.telefono }}
+                {% for error in form.telefono.errors %}
+                <span class="error">{{ error }}</span>
+                {% endfor %}
+            </div>
+            <div class="campo">
+                {{ form.password1 }}
+                {% for error in form.password1.errors %}
+                <span class="error">{{ error }}</span>
+                {% endfor %}
+            </div>
+            <div class="campo">
+                {{ form.password2 }}
+                {% for error in form.password2.errors %}
+                <span class="error">{{ error }}</span>
+                {% endfor %}
+            </div>
+            <div class="campo">
+                {{ form.numero_dni }}
+                {% for error in form.numero_dni.errors %}
+                <span class="error">{{ error }}</span>
+                {% endfor %}
+            </div>
+            <div class="campo">
+                <label for="{{ form.foto_dni.id_for_label }}">Foto del DNI</label>
+                {{ form.foto_dni }}
+                {% for error in form.foto_dni.errors %}
+                <span class="error">{{ error }}</span>
+                {% endfor %}
+            </div>
+            <button type="submit">Registrarse</button>
+        </div>
+    </fieldset>
+</form>
+{% endblock %}
 
 

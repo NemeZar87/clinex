@@ -43,8 +43,8 @@ class Medico(models.Model):
     #     related_name='medicos'
     # )
 
-    def __str__(self):
-        return f"{self.nombre} - {self.localidad.nombre if self.localidad else 'Sin localidad'}"
+    # def __str__(self):
+    #     return f"{self.nombre} - {self.localidad.nombre if self.localidad else 'Sin localidad'}"
 
     #on_delete=models.SET_NULL si se borra la localidad, no borra al médico, solo deja el campo vacío.
     #null=True, blank=True permite editar el perfil sin forzar estos campos.

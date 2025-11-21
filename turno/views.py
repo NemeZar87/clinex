@@ -11,7 +11,7 @@ from django.contrib.auth.decorators import login_required
 @login_required
 def crear_turno(request, year, month, day):
     # print("punto 0")
-    medico_id = 2  # reemplazar por request.session.get("medico_id")
+    medico_id = 1  # reemplazar por request.session.get("medico_id")
     horario_query = get_object_or_404(HorarioTrabajo, pk=medico_id)
     medico = horario_query.medico
     paciente = get_object_or_404(Paciente, usuario=request.user)
@@ -56,7 +56,7 @@ def crear_turno(request, year, month, day):
         turno = get_object_or_404(Turno, id=turno_id)
         turno.paciente_nombre = paciente.usuario
         turno.save()
-        return redirect("calendario")
+        return redirect("turno:calendario")
 
     # print("punto 3")
     # print(medico)
@@ -123,6 +123,20 @@ def calendario(request):
         5: "sabado",
         6: "domingo",
     }
+    MESES_MAP = {
+        1: "Enero",
+        2: "Febrero",
+        3: "Marzo",
+        4: "Abril",
+        5: "Mayo",
+        6: "Junio",
+        7: "Julio",
+        8: "Agosto",
+        9: "Septiembre",
+        10: "Octubre",
+        11: "Noviembre",
+        12: "Diciembre",
+    }
     
     hoy = timezone.localdate()
     year = hoy.year
@@ -130,9 +144,9 @@ def calendario(request):
 
     # Obtener el médico previamente seleccionado
     # print(f"Id del medico = {request.session.get("medico_id")}")
-    medico_id = 2
+    medico_id = 1
     # medico_id = request.session.get("medico_id")  # o usar un ID fijo: medico_id = 1
-    horario_query = get_object_or_404(HorarioTrabajo, pk=medico_id)
+    horario_query = get_object_or_404(HorarioTrabajo, pk=1)
     medico_var = horario_query.medico
     
     dia_laboral = horario_query.dia
@@ -204,21 +218,14 @@ def calendario(request):
     # print(hora_inicio)
     # print(hora_fin)
     # print(weekday_text)
-
-
-
-
-        
-
-
+    mes = MESES_MAP[month]
 
     context = {
         "calendario": calendario,
         "dia": dia_laboral,       
-        "inicio": hora_inicio,       
-        "fin": hora_fin,       
-        "year": year,
-        "month": month,
+        "inicio": hora_inicio,
+        "mes": mes,       
+        "fin": hora_fin,
         "medico": medico_var,
     }
 
@@ -233,6 +240,3 @@ def turno(request):
 #Falta que medico_id sea traido desde request (se lo mandariamos nosotros cuando el usuario clickea en el medico que desea ver sus horario.)
 #Actualmente el programar esta puesto como version de prueba en id de medico = 2 pero es fijo, no sirve.
 #atte: Chino (anotaciones mias)
-
-#asddd
-#basura 1234
