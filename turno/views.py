@@ -11,7 +11,7 @@ from django.contrib.auth.decorators import login_required
 @login_required
 def crear_turno(request, year, month, day):
     # print("punto 0")
-    medico_id = 2  # reemplazar por request.session.get("medico_id")
+    medico_id = 1  # reemplazar por request.session.get("medico_id")
     horario_query = get_object_or_404(HorarioTrabajo, pk=medico_id)
     medico = horario_query.medico
     paciente = get_object_or_404(Paciente, usuario=request.user)
@@ -130,9 +130,9 @@ def calendario(request):
 
     # Obtener el médico previamente seleccionado
     # print(f"Id del medico = {request.session.get("medico_id")}")
-    medico_id = 2
+    medico_id = 1
     # medico_id = request.session.get("medico_id")  # o usar un ID fijo: medico_id = 1
-    horario_query = get_object_or_404(HorarioTrabajo, pk=medico_id)
+    horario_query = get_object_or_404(HorarioTrabajo, pk=1)
     medico_var = horario_query.medico
     
     dia_laboral = horario_query.dia
