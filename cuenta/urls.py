@@ -16,4 +16,6 @@ urlpatterns = [
     path("cerrar_sesion/", views.cerrar_sesion_view, name="cerrar_sesion"),
     path("cronograma/", views.cronograma, name="cronograma"),
     path("aspecto/", views.aspecto, name="aspecto"),
+    path("nueva_consulta/<int:paciente_id>/", views.crear_consulta, name="crear_consulta"),
+    path("detalle_paciente/<int:paciente_id>/", views.detalle_paciente, name="detalle_paciente"),
 ]

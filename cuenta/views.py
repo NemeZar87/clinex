@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import CrearCuenta, InicioSesion
+from .forms import CrearCuenta, InicioSesion, ConsultaForm
 from cuenta.services.servicios import crear_cuenta, iniciar_sesion, cerrar_sesion, medico_required
 from .services.lector_dni import lector_total
-from .models import Paciente, UsuarioPersonalizado
+from .models import Paciente, UsuarioPersonalizado, Medico, HistoriaClinica
 from turno.models import Turno
 # from principal.services.servicios import guardar_localidades, obtener_todas_localidades, obtener_todos_gobiernos_locales
 
@@ -86,7 +86,45 @@ def turnos_view(request):
     return render(request, "cuenta/turnos.html", ctx)
 
 def historia_clinica_view(request):
-    return render(request, "cuenta/historia_clinica.html")
+    medico = get_object_or_404(Medico, usuario=request.user)
+    turnos_reservados = Turno.objects.filter(
+        medico=medico,
+        paciente_nombre__isnull=False
+    ).order_by("inicio")
+    lista_turnos_reservados = list(turnos_reservados)
+    print(lista_turnos_reservados)
+    ctx = {
+        "turnos": lista_turnos_reservados,
+    }
+
+
+    return render(request, "cuenta/historia_clinica.html", ctx)
+
+def crear_consulta(request, paciente_id):
+    paciente = get_object_or_404(Paciente, id=paciente_id)
+    
+    if request.method == 'POST':
+        form = ConsultaForm(request.POST)
+        if form.is_valid():
+            consulta = form.save(commit=False) #guardamos los datos en un objeto pero no la bd
+            consulta.paciente = paciente           # asignamos paciente
+            consulta.profesional = request.user    # asignamos el usuario que crea la consulta (medico)
+            consulta.save()
+            return redirect('cuenta:detalle_paciente', paciente_id=paciente.id)
+    else:
+        form = ConsultaForm()
+    
+    return render(request, 'cuenta/crear_consulta.html', {'form': form, 'paciente': paciente})
+
+def detalle_paciente(request, paciente_id):
+    paciente = get_object_or_404(Paciente, usuario_id=paciente_id)
+    consultas = paciente.consultas.filter(profesional_id=request.user).order_by('-fecha')
+
+    ctx =  {
+        'paciente': paciente,
+        'consultas': consultas,
+    }
+    return render(request, 'cuenta/detalle_paciente.html', ctx)
 
 @medico_required
 def configuracion_medica_view(request):

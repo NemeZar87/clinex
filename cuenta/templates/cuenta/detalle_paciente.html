@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block main %}
+<h1>{{ paciente.usuario.get_full_name }}</h1>
+
+<h3>Datos personales</h3>
+<ul>
+    <li>Teléfono: {{ paciente.telefono }}</li>
+    <li>Dirección: {{ paciente.direccion }}</li>
+    <li>Estado civil: {{ paciente.estado_civil }}</li>
+    <li>Obra social: {{ paciente.obra_social }}</li>
+</ul>
+
+<h3>Antecedentes médicos</h3>
+<ul>
+    <li>Enfermedades crónicas: {{ paciente.enfermedades_cronicas }}</li>
+    <li>Alergias: {{ paciente.alergias }}</li>
+    <li>Cirugías previas: {{ paciente.cirugias_previas }}</li>
+    <li>Hospitalizaciones previas: {{ paciente.hospitalizaciones_previas }}</li>
+    <li>Medicación habitual: {{ paciente.medicacion_habitual }}</li>
+    <li>Antecedentes familiares: {{ paciente.antecedentes_familiares }}</li>
+</ul>
+
+<hr>
+
+<h2>Consultas registradas</h2>
+
+<a href="{% url 'cuenta:crear_consulta' paciente.id %}">
+    Crear nueva consulta
+</a>
+
+{% if paciente.consultas.all %}
+    <ul>
+        {% for consulta in paciente.consultas.all %}
+            <li>
+                <b>{{ consulta.fecha|date:"d/m/Y H:i" }}</b>  
+                — {{ consulta.motivo }}
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No hay consultas registradas para este paciente.</p>
+{% endif %}
+
+{% endblock %}

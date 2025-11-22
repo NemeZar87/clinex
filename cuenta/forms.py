@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from .models import UsuarioPersonalizado, HorarioTrabajo, LugarTrabajo
+from .models import UsuarioPersonalizado, HorarioTrabajo, LugarTrabajo, HistoriaClinica, Consulta
 from django.utils import timezone
 
 class CrearCuenta(UserCreationForm):
@@ -83,3 +83,20 @@ class LugarTrabajoForm(forms.ModelForm):
                 'oninput' : 'this.value = this.value.replace(/[^0-9]/g, '').slice(0,11);' # remplaza todos los caracteres que no sean numeros por nada y limita la cantidad de caracteres que puedes colocar a 11.
             })
         }
+
+class HistoriaClinicaForm(forms.ModelForm):
+    class Meta:
+        model = HistoriaClinica
+
+        exclude = ["usuario"]
+        widgets = {
+            'telefono' : forms.NumberInput(attrs={
+                'oninput' : 'this.value = this.value.replace(/[^0-9]/g, '').slice(0,11);' #gracias tomi, reutilice tu codigo.
+            })
+        }
+
+class ConsultaForm(forms.ModelForm):
+    class Meta:
+        model = Consulta
+
+        exclude = ["paciente", "profesional", "fecha"]
