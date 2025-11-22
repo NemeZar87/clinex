@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .forms import CrearCuenta, InicioSesion
 from cuenta.services.servicios import crear_cuenta, iniciar_sesion, cerrar_sesion, medico_required
 from .services.lector_dni import lector_total
-from .models import Paciente
+from .models import Paciente, UsuarioPersonalizado
 from turno.models import Turno
 # from principal.services.servicios import guardar_localidades, obtener_todas_localidades, obtener_todos_gobiernos_locales
 
@@ -59,8 +59,8 @@ def servicios_view(request):
     return render(request, "cuenta/servicios.html")
 
 def turnos_view(request):
-    paciente = get_object_or_404(Paciente, usuario=request.user)
-    turnos_asignados = Turno.objects.filter(paciente_nombre_id=paciente.usuario)
+    paciente = get_object_or_404(UsuarioPersonalizado, username=request.user.username)
+    turnos_asignados = Turno.objects.filter(paciente_nombre_id=paciente.id)
     lista_turnos = list(turnos_asignados)
     todo = []
     for turno in lista_turnos:
@@ -108,13 +108,13 @@ def configuracion_medica_view(request):
     #         medico.save()
     #         return redirect('cuenta:config_medica')
 
-    # ctx = {
+    ctx = {
     #     "medico": medico,
     #     "horarios": horarios,
     #     "localidades": localidades,
     #     "gobiernos": gobiernos,
-    # }
-    return render(request, "cuenta/config_medica.html", "ctx")
+    }
+    return render(request, "cuenta/config_medica.html", ctx)
 
 
 def configuracion_perfil_view(request):

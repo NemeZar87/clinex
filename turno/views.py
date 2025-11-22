@@ -4,7 +4,7 @@ from django.conf import settings
 from datetime import date, datetime, timedelta
 from calendar import monthrange, monthcalendar
 from .models import Turno
-from cuenta.models import Paciente, HorarioTrabajo
+from cuenta.models import Paciente, HorarioTrabajo, UsuarioPersonalizado
 from django.contrib.auth.decorators import login_required
 
 
@@ -14,7 +14,7 @@ def crear_turno(request, year, month, day):
     medico_id = 1  # reemplazar por request.session.get("medico_id")
     horario_query = get_object_or_404(HorarioTrabajo, pk=medico_id)
     medico = horario_query.medico
-    paciente = get_object_or_404(Paciente, usuario=request.user)
+    paciente = get_object_or_404(UsuarioPersonalizado, username=request.user.username)
     fecha = date(year, month, day)
     # print("punto 1")
 
@@ -54,7 +54,7 @@ def crear_turno(request, year, month, day):
     if request.method == "POST":
         turno_id = request.POST.get("turno_id")
         turno = get_object_or_404(Turno, id=turno_id)
-        turno.paciente_nombre = paciente.usuario
+        turno.paciente_nombre = paciente.id
         turno.save()
         return redirect("turno:calendario")
 

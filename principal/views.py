@@ -7,13 +7,7 @@ from django.shortcuts import render
 
 
 def index(request):
-    print("test")
     medicos_qs = UsuarioPersonalizado.objects.filter(tipo_cuenta='medico')
-    print(medicos_qs)
-
-    for j in medicos_qs:
-        print(f"JOTA: {j}")
-
     ctx = {
         "medicos": medicos_qs,
     }
