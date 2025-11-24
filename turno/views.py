@@ -92,8 +92,8 @@ def calendario(request):
         for horario in horarios_validos:
             inicio_dt = datetime.combine(fecha, horario.hora_inicio)
             fin_dt = datetime.combine(fecha, horario.hora_fin)
-            inicio_dt = make_aware_if_needed(inicio_dt)
-            fin_dt = make_aware_if_needed(fin_dt)
+            # inicio_dt = make_aware_if_needed(inicio_dt)
+            # fin_dt = make_aware_if_needed(fin_dt)
             intervalo = horario.tiempo_turno  # DurationField -> timedelta
 
             # protección: si tiempo_turno es 0 o negativo, saltar

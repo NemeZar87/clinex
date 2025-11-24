@@ -1,18 +1,51 @@
 {% extends "base.html" %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {% block titulo %}
-    <title>Historia clinica</title>
-    {% endblock %}
-</head>
-<body>
-    {% block main %}
-    <h1>
-        Historia clinica
-    </h1>
-    {% endblock %}
-</body>
-</html>
+{% load static %}
+
+{% block css_secundario %}
+<link rel="stylesheet" href="{% static 'historia_clinica/historia_clinica.css' %}">
+<link rel="stylesheet" href="{% static 'cuenta/compartido.css' %}">
+<link rel="stylesheet" href="{% static 'cuenta/config_perfil.css' %}">
+{% endblock %}
+
+{% block main %}
+<!-- 1 - turnos, 2 - historia clinica, 3- configuracion medica, 4- configuracion del perfil, 5 - mi historia, 6 - apecto, 7 - acerca de¿-->
+    <ul class="ul_contenedor2">
+        <li><a href="{% url 'cuenta:turnos' %}">Turnos</a></li>
+        <li id="seleccionado">Historia clinica</li>
+        {% if user.tipo_cuenta == 'medico' %}
+        <li><a href="{% url 'cuenta:config_medica' %}">Configuración medica</a></li>
+        {% endif %}
+        <li><a href="{% url 'cuenta:config_perfil' %}">Configuracion de perfil</a></li>
+        <li><a href="{% url 'historia_clinica:mi_historia' %} ">Mi historia clinica</a></li>
+        <li><a href="#">aspecto</a></li>
+        <li><a href="#">acerca de</a></li>
+
+        
+
+    </ul>
+    <table border="1" cellspacing="0" cellpadding="10" align="center">
+        <thead>
+            <tr>
+                <th>Paciente</th>
+                <th>Fecha</th>
+                <th>Historia clinica</th>
+                <th>Datos paciente</th>
+                <th>Consulta</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for turno in turnos %}
+            <tr>
+                <td>{{ turno.paciente_nombre.get_full_name }} </td>
+                <td>{{ turno.inicio }} </td>
+                <td><a href="{% url 'historia_clinica:detalle_paciente' turno.paciente_nombre.id %} ">Ver historia clinica</a> </td>
+                <td><a href="{% url 'historia_clinica:cargar_datos' turno.paciente_nombre.id %} ">Cargar datos del paciente</a></td>
+                <td><a href="{% url 'historia_clinica:crear_consulta' turno.paciente_nombre.id %} ">Crear consulta</a> </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% if errors %}
+        <p>{ errors.error }</p>        
+    {% endif %}
+{% endblock %}

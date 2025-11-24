@@ -1,7 +1,26 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block css_secundario %}
+  <link rel="stylesheet" href="{% static 'cuenta/compartido.css' %}">
+
+{% endblock%}
+
+
 {% block main %}
+<!-- 1 - turnos, 2 - historia clinica, 3- configuracion medica, 4- configuracion del perfil, 5 - mi historia, 6 - apecto, 7 - acerca de¿-->
+  <ul class="ul_contenedor2">
+    <li><a href="{% url 'cuenta:turnos' %}">Turnos</a></li>
+    {% if user.tipo_cuenta == 'medico' %}        
+    <li><a href="{% url 'historia_clinica:historia_clinica' %}">Historia clinica</a></li>
+    {% endif %}
+    <li id="seleccionado">Configuración medica</li>
+    <li><a href="{% url 'cuenta:config_perfil' %}">Configuracion de perfil</a></li>
+    <li><a href="{% url 'historia_clinica:mi_historia' %} ">Mi historia clinica</a></li>
+    <li><a href="#">aspecto</a></li>
+    <li><a href="#">acerca de</a></li>
+  </ul>
+
   <section>
     <h2>Configurar aspecto</h2>
     <button id="cambio_de_modo">Cambiar modo</button>

@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+<title>Consulta</title>
+{% endblock %}
+
+{% block main %}
+<h1>Informacion de la consulta</h1>
+<hr>
+<h2>Paciente {{ paciente.get_full_name }} </h2>
+<hr>
+<h2>Profesional {{ consulta.profesional.get_full_name }} </h2>
+
+<ul>
+    <li>Fecha: {{ fecha }} </li>
+    <li>Motivo: {{ consulta.motivo }} </li>
+    <li>Historia de la enfermedad transitada: {{ consulta.historia_enfermedad_actual }} </li>
+    <li>Examen fisico: {{ consulta.examen_fisico }} </li>
+    <li>Diagnostico: {{ consulta.diagnostico }} </li>
+    <li>Estudios complementarios: {{ consulta.estudios_complementarios }} </li>
+    <li>Tratamiento: {{ consulta.tratamiento }} </li>
+    <li>Evolucion a la fecha: {{ consulta.evolucion }} </li>
+</ul>
+
+{% endblock %}

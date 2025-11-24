@@ -2,8 +2,10 @@
 {% load static %}
 
 {% block main %}
-<h1>{{ paciente.usuario.get_full_name }}</h1>
+<h1>{{ paciente.get_full_name }}</h1>
 
+<hr>
+<h2>Datos de paciente</h2>
 <h3>Datos personales</h3>
 <ul>
     <li>Teléfono: {{ paciente.telefono }}</li>
@@ -26,16 +28,16 @@
 
 <h2>Consultas registradas</h2>
 
-<a href="{% url 'cuenta:crear_consulta' paciente.id %}">
+<a href="{% url 'historia_clinica:crear_consulta' paciente.usuario.id %}">
     Crear nueva consulta
 </a>
 
-{% if paciente.consultas.all %}
+{% if consultas %}
     <ul>
-        {% for consulta in paciente.consultas.all %}
+        {% for consulta in consultas %}
             <li>
                 <b>{{ consulta.fecha|date:"d/m/Y H:i" }}</b>  
-                — {{ consulta.motivo }}
+                — {{ consulta.motivo }} - <a href="{% url 'historia_clinica:ver_consulta' consulta.id %} ">Ver Informacion</a>
             </li>
         {% endfor %}
     </ul>
