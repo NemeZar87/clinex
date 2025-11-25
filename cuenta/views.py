@@ -65,6 +65,18 @@ def contacto_view(request):
 def servicios_view(request):
     return render(request, "cuenta/servicios.html")
 
+########################################################
+
+    # HTML: valor.0 == *texto visible, valor.1 == *ruta, valor.2 == activo o no
+    # Python:
+    #   "nompre opcional": {
+    #       "Texto visible", // "Configuracion medica",
+    #       "ruta de la pagina", // "cuenta:config_medica",
+    #       valor buleano para saber si es un link o no, pongan False si se encuentran en la misma pagina de la view // True o False
+    #   }
+
+########################################################
+
 def turnos_view(request):
     paciente = get_object_or_404(UsuarioPersonalizado, username=request.user.username)
     turnos_asignados = Turno.objects.filter(paciente_nombre_id=paciente.id)
@@ -86,12 +98,49 @@ def turnos_view(request):
     else:
         reserva = False
     
+    op_perfil = {
+        "turnos": [
+            "Turnos",
+            "cuenta:turnos",
+            False
+        ],
+        "historia_clinica": [
+            "Historia clinica",
+            "historia_clinica:historia_clinica",
+            True
+            ],
+        "config_medica": [
+            "Configuración medica",
+            "cuenta:config_medica",
+            True
+            ],
+        "config_perfil": [
+            "Configuración de perfil",
+            "cuenta:config_perfil",
+            True
+            ],
+        "mi_historia_clinica": [
+            "Mi historia clinica",
+            "historia_clinica:mi_historia",
+            True
+            ],
+        "aspecto": [
+            "Aspecto",
+            "cuenta:aspecto",
+            True
+        ],
+        "acerca_de": [
+            "Acerca de nosotros",
+            "",
+            True
+        ]
+    }
     ctx = {
         "turnos": todo,
         "reserva": reserva,
+        "opciones": op_perfil,
     }
     return render(request, "cuenta/turnos.html", ctx)
-
 
 @medico_required
 def configuracion_medica_view(request):
@@ -111,12 +160,50 @@ def configuracion_medica_view(request):
             medico.save()
         return redirect('cuenta:config_medica')
 
+    op_perfil = {
+        "turnos": [
+            "Turnos",
+            "cuenta:turnos",
+            True
+        ],
+        "historia_clinica": [
+            "Historia clinica",
+            "historia_clinica:historia_clinica",
+            True
+            ],
+        "config_medica": [
+            "Configuración medica",
+            "cuenta:config_medica",
+            False
+            ],
+        "config_perfil": [
+            "Configuración de perfil",
+            "cuenta:config_perfil",
+            True
+            ],
+        "mi_historia_clinica": [
+            "Mi historia clinica",
+            "historia_clinica:mi_historia",
+            True
+            ],
+        "aspecto": [
+            "Aspecto",
+            "cuenta:aspecto",
+            True
+        ],
+        "acerca_de": [
+            "Acerca de nosotros",
+            "",
+            True
+        ]
+    }
     ctx = {
         "medico": medico,
         "provincias": provincias,
         "provincia_actual": provincia_actual,
         "departamento_actual": departamento_actual,
         "localidad_actual": localidad_actual,
+        "opciones": op_perfil,
     }
 
     return render(request, "cuenta/config_medica.html", ctx)
@@ -125,21 +212,87 @@ def configuracion_medica_view(request):
 
 def configuracion_perfil_view(request):
     op_perfil = {
-        "config_perfil": False,
-        "config_medica": True,
-        "turnos": True,
-        "historia_clinica": True,
-        "mi_historial_": True
+        "turnos": [
+            "Turnos",
+            "cuenta:turnos",
+            True
+        ],
+        "historia_clinica": [
+            "Historia clinica",
+            "historia_clinica:historia_clinica",
+            True
+            ],
+        "config_medica": [
+            "Configuración medica",
+            "cuenta:config_medica",
+            True
+            ],
+        "config_perfil": [
+            "Configuración de perfil",
+            "cuenta:config_perfil",
+            False
+            ],
+        "mi_historia_clinica": [
+            "Mi historia clinica",
+            "historia_clinica:mi_historia",
+            True
+            ],
+        "aspecto": [
+            "Aspecto",
+            "cuenta:aspecto",
+            True
+        ],
+        "acerca_de": [
+            "Acerca de nosotros",
+            "",
+            True
+        ]
     }
-    return render(request, "cuenta/config_perfil.html")
+    return render(request, "cuenta/config_perfil.html", {"opciones": op_perfil})
 
 def cronograma(request):
     return render(request, "cuenta/cronograma.html")
 
 def aspecto(request):
-    return render(request, "cuenta/aspecto.html")
+    op_perfil = {
+        "turnos": [
+            "Turnos",
+            "cuenta:turnos",
+            True
+        ],
+        "historia_clinica": [
+            "Historia clinica",
+            "historia_clinica:historia_clinica",
+            True
+            ],
+        "config_medica": [
+            "Configuración medica",
+            "cuenta:config_medica",
+            True
+            ],
+        "config_perfil": [
+            "Configuración de perfil",
+            "cuenta:config_perfil",
+            True
+            ],
+        "mi_historia_clinica": [
+            "Mi historia clinica",
+            "historia_clinica:mi_historia",
+            True
+            ],
+        "aspecto": [
+            "Aspecto",
+            "cuenta:aspecto",
+            False
+        ],
+        "acerca_de": [
+            "Acerca de nosotros",
+            "",
+            True
+        ]
+    }
+    return render(request, "cuenta/aspecto.html", {"opciones": op_perfil})
 
-from django.http import JsonResponse
 
 
 def filtrar_departamentos(request, prov_id):
