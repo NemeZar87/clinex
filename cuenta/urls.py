@@ -16,4 +16,6 @@ urlpatterns = [
     path("cerrar_sesion/", views.cerrar_sesion_view, name="cerrar_sesion"),
     path("cronograma/", views.cronograma, name="cronograma"),
     path("aspecto/", views.aspecto, name="aspecto"),
+    path("api/departamentos/<str:prov_id>/", views.filtrar_departamentos, name="api_departamentos"),
+    path("api/localidades/<str:dep_id>/", views.filtrar_localidades, name="api_localidades"),
 ]

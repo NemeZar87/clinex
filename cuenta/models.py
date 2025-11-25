@@ -29,22 +29,26 @@ class UsuarioPersonalizado(AbstractUser):
 
 class Medico(models.Model):
     usuario = models.OneToOneField(UsuarioPersonalizado, on_delete=models.CASCADE)
+
     ESPECIALIDADES = [
         ('medico-clinico', 'Medico clinico'),
         ('traumatologo', 'Traumatologo'),
         ('dentista', 'Dentista'),
     ]
     especialidad = models.CharField(max_length=20, choices=ESPECIALIDADES, default="medico-clinico")
-    # localidad = models.ForeignKey(
-    #     Localidad,
-    #     on_delete=models.SET_NULL,
-    #     null=True,
-    #     blank=True,
-    #     related_name='medicos'
-    # )
 
-    def __str__(self):
-        return f"{self.nombre} - {self.localidad.nombre if self.localidad else 'Sin localidad'}"
+    localidad = models.ForeignKey(
+        Localidad,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="medicos"
+    )
+
+def __str__(self):
+    nombre = f"{self.usuario.first_name} {self.usuario.last_name}".strip()
+    return f"{nombre} - {self.localidad.nombre if self.localidad else 'Sin localidad'}"
+
 
     #on_delete=models.SET_NULL si se borra la localidad, no borra al médico, solo deja el campo vacío.
     #null=True, blank=True permite editar el perfil sin forzar estos campos.

@@ -2,7 +2,8 @@ from django.shortcuts import render, redirect
 from .forms import CrearCuenta, InicioSesion
 from cuenta.services.servicios import crear_cuenta, iniciar_sesion, cerrar_sesion, medico_required
 from .services.lector_dni import lector_total
-# from principal.services.servicios import guardar_localidades, obtener_todas_localidades, obtener_todos_gobiernos_locales
+from principal.models import Provincia, Departamento, Localidad
+from django.http import JsonResponse
 
 def crear_cuenta_view(request):
     if request.method == "POST":
@@ -64,31 +65,32 @@ def historia_clinica_view(request):
 
 @medico_required
 def configuracion_medica_view(request):
-    # Guardar datos de la API (puede hacerse una vez o con cron)
-    guardar_localidades()
-
     medico = request.user.medico
-    horarios = medico.horario.select_related("lugar")
-    localidades = obtener_todas_localidades()
-    gobiernos = obtener_todos_gobiernos_locales()
+
+    # PRESELECCIONES
+    localidad_actual = medico.localidad
+    departamento_actual = localidad_actual.departamento if localidad_actual else None
+    provincia_actual = departamento_actual.provincia if departamento_actual else None
+
+    provincias = Provincia.objects.all()
 
     if request.method == "POST":
-        localidad_id = request.POST.get("localidad")
-        gobierno_local_id = request.POST.get("gobierno_local")
-
-        if localidad_id or gobierno_local_id:
-            medico.localidad_id = localidad_id if localidad_id else medico.localidad_id
-            medico.gobierno_local_id = gobierno_local_id if gobierno_local_id else medico.gobierno_local_id
+        loc_id = request.POST.get("localidad")
+        if loc_id:
+            medico.localidad_id = loc_id
             medico.save()
-            return redirect('cuenta:config_medica')
+        return redirect('cuenta:config_medica')
 
     ctx = {
         "medico": medico,
-        "horarios": horarios,
-        "localidades": localidades,
-        "gobiernos": gobiernos,
+        "provincias": provincias,
+        "provincia_actual": provincia_actual,
+        "departamento_actual": departamento_actual,
+        "localidad_actual": localidad_actual,
     }
+
     return render(request, "cuenta/config_medica.html", ctx)
+
 
 
 def configuracion_perfil_view(request):
@@ -99,3 +101,16 @@ def cronograma(request):
 
 def aspecto(request):
     return render(request, "cuenta/aspecto.html")
+
+from django.http import JsonResponse
+
+
+def filtrar_departamentos(request, prov_id):
+    # Devuelve id_indec y nombre, que es lo que espera el JS
+    data = list(Departamento.objects.filter(provincia_id=prov_id).values("id_indec", "nombre"))
+    return JsonResponse(data, safe=False)
+
+def filtrar_localidades(request, dep_id):
+    # Devuelve id_indec y nombre
+    data = list(Localidad.objects.filter(departamento_id=dep_id).values("id_indec", "nombre"))
+    return JsonResponse(data, safe=False)
