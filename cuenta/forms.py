@@ -46,8 +46,17 @@ class CrearCuenta(UserCreationForm):
         }
 
 class InicioSesion(AuthenticationForm):
-    username = forms.CharField(label="Usuario")
-    password = forms.CharField(widget=forms.PasswordInput, label="Contraseña")
+    username = forms.CharField(widget=forms.TextInput(
+        attrs={
+            "placeholder": "Nombre de usuario"
+        }),
+        label="Usuario"
+    )
+    password = forms.CharField(widget=forms.PasswordInput(attrs={
+        "placeholder": "Contraseña"
+    }),
+    label="Contraseña"
+    )
 
 class HorarioTrabajoForm(forms.ModelForm):
     class Meta:

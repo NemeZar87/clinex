@@ -6,22 +6,7 @@
 {% endblock %}
 
 {% block main %}
-
 <div class="div_contenedor">
-
-    <!-- BARRA LATERAL -->
-    <aside class="barra_lateral">
-        <h2>Panel de publicidad y noticias</h2>
-        <ul>
-            <li><a href="{% url 'principal:perfil-medico' %}">medico = 1</a></li>
-            <li>Agrega anuncio aquí</li>
-            <li>Agrega anuncio aquí</li>
-            <li>Agrega anuncio aquí</li>
-            <li>Agrega anuncio aquí</li>
-            <li>Agrega anuncio aquí</li>
-        </ul>
-    </aside>
-
     <!-- CONTENIDO PRINCIPAL -->
     <div class="pagina">
         <div class="panel-medico">
@@ -70,9 +55,23 @@
                 {% endfor %}
             </ul>
         </div>
+        <div>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Assumenda in, quisquam reprehenderit odit nobis doloribus architecto totam ducimus! Accusantium doloribus ab aliquid ducimus aspernatur molestias assumenda praesentium molestiae dolores dolore.</p>
+        </div>
     </div>
+    <!-- BARRA LATERAL -->
+    <aside class="barra_lateral">
+        <h2>Panel de publicidad y noticias</h2>
+        <ul>
+            <li><a href="{% url 'principal:perfil-medico' %}">medico = 1</a></li>
+            <li>Agrega anuncio aquí</li>
+            <li>Agrega anuncio aquí</li>
+            <li>Agrega anuncio aquí</li>
+            <li>Agrega anuncio aquí</li>
+            <li>Agrega anuncio aquí</li>
+        </ul>
+    </aside>
 </div>
-
 {% endblock %}
 
 {% block div %}{% endblock %}

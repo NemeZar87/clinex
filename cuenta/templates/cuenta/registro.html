@@ -87,7 +87,7 @@
                 {% endfor %}
             </div>
             <div class="campo">
-                <label for="{{ form.foto_dni.id_for_label }}">Foto del DNI</label>
+                <label for="{{ form.foto_dni.id_for_label }}" class="campo-dni">Foto del DNI</label>
                 {{ form.foto_dni }}
                 {% for error in form.foto_dni.errors %}
                 <span class="error">{{ error }}</span>
