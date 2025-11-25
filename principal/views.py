@@ -2,7 +2,7 @@ from django.shortcuts import render
 from cuenta.models import UsuarioPersonalizado
 from cuenta.models import Medico, HorarioTrabajo
 from principal.models import Departamento, Localidad, Provincia 
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 # Create your views here.
 
 def index(request):

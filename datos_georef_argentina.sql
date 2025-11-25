@@ -623,17 +623,14 @@ INSERT INTO principal_localidad (id_indec, nombre, departamento_id) VALUES ('580
 INSERT INTO principal_localidad (id_indec, nombre, departamento_id) VALUES ('82091010', 'Aguará Grande', '82091');
 INSERT INTO principal_localidad (id_indec, nombre, departamento_id) VALUES ('66056010', 'Aguaray', '66056');
 INSERT INTO principal_localidad (id_indec, nombre, departamento_id) VALUES ('66126010', 'Aguas Blancas', '66126');
-INSERT INTO principal_localidad (id_indec, nombre, departamento_id) VALUES ('3801401001', 'Aguas Calientes', '38014');
 INSERT INTO principal_localidad (id_indec, nombre, departamento_id) VALUES ('38014010', 'Aguas Calientes', '38014');
 INSERT INTO principal_localidad (id_indec, nombre, departamento_id) VALUES ('0642002001', 'Aguas Verdes', '06420');
-INSERT INTO principal_localidad (id_indec, nombre, departamento_id) VALUES ('9007701001', 'Aguilares', '90077');
 INSERT INTO principal_localidad (id_indec, nombre, departamento_id) VALUES ('90077010', 'Aguilares', '90077');
 INSERT INTO principal_localidad (id_indec, nombre, departamento_id) VALUES ('06854010', 'Agustín Mosconi', '06854');
 INSERT INTO principal_localidad (id_indec, nombre, departamento_id) VALUES ('06413010', 'Agustín Roca', '06413');
 INSERT INTO principal_localidad (id_indec, nombre, departamento_id) VALUES ('06413020', 'Agustina', '06413');
 INSERT INTO principal_localidad (id_indec, nombre, departamento_id) VALUES ('42105010', 'Agustoni', '42105');
 INSERT INTO principal_localidad (id_indec, nombre, departamento_id) VALUES ('46028010', 'Aicuñá', '46028');
-INSERT INTO principal_localidad (id_indec, nombre, departamento_id) VALUES ('4600701001', 'Aimogasta', '46007');
 INSERT INTO principal_localidad (id_indec, nombre, departamento_id) VALUES ('46007010', 'Aimogasta', '46007');
 INSERT INTO principal_localidad (id_indec, nombre, departamento_id) VALUES ('54119010', 'Alba Posse', '54119');
 INSERT INTO principal_localidad (id_indec, nombre, departamento_id) VALUES ('82084020', 'Albarellos', '82084');
