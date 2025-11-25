@@ -5,9 +5,8 @@
     display: flex;
     flex-direction: column;
     gap: 15px; /* espacio entre li */
-    min-height: 100vh;
-    margin-left: auto;
-    position: fixed;
+    height: 100%;
+    position: absolute;
     right: 0;
 }
 
@@ -28,7 +27,7 @@
 .panel-medico {
     border: 2px solid #ccc;
     border-radius: 10px;
-    width: 80%;
+    width: 700pt;
     margin-top: 2em;
 }
 
@@ -39,11 +38,14 @@
 
 .pagina {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-right: 250px;
 }
 
 .div_contenedor {
-    display: grid;
-    grid-template-columns: 1fr 230px;
-    gap: 20px;
+    display: flex;
+    justify-content: space-between;
+    height: 100%;
 }
