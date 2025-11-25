@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.http import Http404, HttpResponse
 from cuenta.models import Medico, UsuarioPersonalizado
 from turno.models import Turno
 from cuenta.services.servicios import medico_required
@@ -11,7 +12,11 @@ from .repositories.conversor_hora import make_aware_if_needed
 # Create your views here.
 
 def mi_historia_clinica(request):
-    historia = get_object_or_404(HistoriaClinica,usuario_id=request.user)
+    try:
+        historia = get_object_or_404(HistoriaClinica, usuario_id=request.user)
+    except Http404:
+        return HttpResponse("No se ha encontrado su historia clinica")
+
     consultas = Consulta.objects.filter(usuario_id=request.user).order_by('-fecha')
 
     ctx = {
@@ -21,9 +26,13 @@ def mi_historia_clinica(request):
 
     return render(request, "historia_clinica/mi_historia.html", ctx)
 
+
 @medico_required
 def historia_clinica_view(request):
-    medico = get_object_or_404(Medico, usuario=request.user)
+    try:
+        medico = get_object_or_404(Medico, usuario=request.user)
+    except Http404:
+        return HttpResponse("No se han encontrado historias clinica")
     turnos_reservados = Turno.objects.filter(
         medico=medico,
         paciente_nombre__isnull=False
@@ -38,21 +47,21 @@ def historia_clinica_view(request):
 @medico_required
 def cargar_datos(request, paciente_id):
     paciente = get_object_or_404(UsuarioPersonalizado, id=paciente_id)
-    
+    historia = HistoriaClinica.objects.filter(usuario_id=paciente_id).first() #busca la primer coincidencia, Devulve None si no encuentra nada
     if request.method == "POST":
-        form = HistoriaClinicaForm(request.POST)
+        form = HistoriaClinicaForm(request.POST, instance=historia)
         if form.is_valid():
             datos = form.save(commit=False)
-            datos.usuario = paciente
+            if historia is None:
+                datos.usuario = paciente
             datos.save()
             return redirect('historia_clinica:detalle_paciente', paciente_id=paciente.id)
     else:
-        form = HistoriaClinicaForm()
+        form = HistoriaClinicaForm(instance=historia)
+
     ctx = {
         "form": form,
-        
     }
-
     return render(request, "historia_clinica/cargar_datos.html", ctx)
 
 @medico_required

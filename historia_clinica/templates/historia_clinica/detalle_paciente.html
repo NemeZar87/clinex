@@ -2,9 +2,10 @@
 {% load static %}
 
 {% block main %}
-<h1>{{ paciente.get_full_name }}</h1>
+<h1>{{ paciente.usuario.get_full_name }}</h1>
 
 <hr>
+
 <h2>Datos de paciente</h2>
 <h3>Datos personales</h3>
 <ul>
