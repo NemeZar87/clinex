@@ -7,53 +7,64 @@
 
 {% block main %}
 <div class="div_contenedor">
-    <!-- CONTENIDO PRINCIPAL -->
+    
+    <!-- BARRA LATERAL -->
+    <aside class="barra_lateral">
+        <h2>Panel de publicidad y noticias</h2>
+        <ul>
+            <li><a href="{% url 'turno:calendario' %}">medico = 2</a></li>
+            <li>Agrega anuncio aquí</li>
+            <li>Agrega anuncio aquí</li>
+            <li>Agrega anuncio aquí</li>
+            <li>Agrega anuncio aquí</li>
+            <li>Agrega anuncio aquí</li>
+        </ul>
+    </aside>
+    
+    <!-- BLOQUE DE FILTRO Y LISTA DE MÉDICOS -->
     <div class="pagina">
         <div class="panel-medico">
             <h2>Lista de Médicos</h2>
-
-            <!--FORMULARIO DE FILTRO -->
-            <form method="get" class="form-filtro">
-                <div class="campo-filtro">
-                    <label for="localidad">Localidad:</label>
-                    <input type="text" name="localidad" id="localidad" value="{{ request.GET.localidad }}">
-                </div>
-
-                <div class="campo-filtro">
-                    <label for="institucion">Institución:</label>
-                    <input type="text" name="institucion" id="institucion" value="{{ request.GET.institucion }}">
-                </div>
-
-                <div class="campo-filtro">
-                    <label for="especialidad">Especialidad:</label>
-                    <select name="especialidad" id="especialidad">
-                        <option value="">-- Todas --</option>
-                        <option value="medico-clinico" {% if request.GET.especialidad == 'medico-clinico' %}selected{% endif %}>Médico Clínico</option>
-                        <option value="traumatologo" {% if request.GET.especialidad == 'traumatologo' %}selected{% endif %}>Traumatólogo</option>
-                        <option value="dentista" {% if request.GET.especialidad == 'dentista' %}selected{% endif %}>Dentista</option>
-                    </select>
-                </div>
-
-                <button type="submit" class="btn-filtrar">Filtrar</button>
+            
+            <!-- FORMULARIO DE FILTRO -->
+            <form method="GET" id="form-filtro">
+                <label>Provincia:</label>
+                <select id="provincia" name="provincia">
+                    <option value="">Todas</option>
+                    {% for p in provincias %}
+                    <option value="{{ p.pk }}">{{ p.nombre }}</option>
+                    {% endfor %}
+                </select>
+                
+                <label>Departamento:</label>
+                <select id="departamento" name="departamento">
+                    <option value="">Todos</option>
+                </select>
+                
+                <label>Localidad:</label>
+                <select id="localidad" name="localidad">
+                    <option value="">Todas</option>
+                </select>
+                
+                <button type="submit">Filtrar</button>
             </form>
-
-            <!--LISTA DE MÉDICOS -->
-            <ul class="ul-medicos">
+            
+            <hr>
+            
+            <h2>Médicos encontrados:</h2>
+            
+            <ul>
                 {% for m in medicos %}
-                    <a href="#">
-                        <li class="medico">
-                            <span class="resaltado">{{ m.usuario.first_name }} {{ m.usuario.last_name }}</span><br>
-                            <strong>{{ m.get_especialidad_display }}</strong><br>
-
-                            {% for horario in m.horario.all %}
-                                <small>{{ horario.lugar.nombre }} ({{ horario.lugar.direccion }})</small><br>
-                            {% endfor %}
-                        </li>
-                    </a>
+                <li>
+                    {{ m.usuario.first_name }} {{ m.usuario.last_name }} — 
+                    {{ m.especialidad }} —
+                    {{ m.localidad.nombre }} ({{ m.localidad.departamento.provincia.nombre }})
+                </li>
                 {% empty %}
-                    <li>No hay médicos registrados o no coinciden con el filtro.</li>
+                <p>No se encontraron médicos.</p>
                 {% endfor %}
             </ul>
+<<<<<<< HEAD
         </div>
         <div>
             <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Assumenda in, quisquam reprehenderit odit nobis doloribus architecto totam ducimus! Accusantium doloribus ab aliquid ducimus aspernatur molestias assumenda praesentium molestiae dolores dolore.</p>
@@ -75,3 +86,13 @@
 {% endblock %}
 
 {% block div %}{% endblock %}
+=======
+            
+            
+            
+            {% endblock %}
+            
+            
+            {% block div %}<script src="{% static 'principal/filtro_medicos.js' %}"></script>{% endblock %}
+            |
+>>>>>>> monje_tiziano
