@@ -17,7 +17,10 @@ def perfil_medico(request):
     medico_id = 1 #esto tiene que llegar de los filtos, solo sirve para pruebas.
     medico_qs = HorarioTrabajo.objects.filter(medico_id=medico_id) #agregar filtro por depto
     lista_medico = list(medico_qs)
-    medico_all = lista_medico[0].medico
+    try:
+        medico_all = lista_medico[0].medico
+    except IndexError:
+        return HttpResponse("asd")
     lugares = []
     for j in medico_qs:
         lugar_all = j.lugar
