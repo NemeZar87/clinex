@@ -17,7 +17,7 @@ class CrearCuenta(UserCreationForm):
 
     class Meta:
         model = UsuarioPersonalizado
-        fields = ["tipo_cuenta", "username", "first_name", "last_name", "fecha_nacimiento", "email", "telefono", "password1", "password2", "numero_dni", "foto_dni"]
+        fields = ["tipo_cuenta", "username", "first_name", "last_name", "fecha_nacimiento", "email", "telefono", "password1", "password2", "numero_dni"]
         widgets = {
             'username': forms.TextInput(attrs={
                 'placeholder': 'Nombre de usuario'

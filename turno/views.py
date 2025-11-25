@@ -54,7 +54,7 @@ def crear_turno(request, year, month, day):
     if request.method == "POST":
         turno_id = request.POST.get("turno_id")
         turno = get_object_or_404(Turno, id=turno_id)
-        turno.paciente_nombre = paciente.id
+        turno.paciente_nombre = paciente
         turno.save()
         return redirect("turno:calendario")
 
@@ -92,8 +92,8 @@ def calendario(request):
         for horario in horarios_validos:
             inicio_dt = datetime.combine(fecha, horario.hora_inicio)
             fin_dt = datetime.combine(fecha, horario.hora_fin)
-            # inicio_dt = make_aware_if_needed(inicio_dt)
-            # fin_dt = make_aware_if_needed(fin_dt)
+            inicio_dt = make_aware_if_needed(inicio_dt)
+            fin_dt = make_aware_if_needed(fin_dt)
             intervalo = horario.tiempo_turno  # DurationField -> timedelta
 
             # protección: si tiempo_turno es 0 o negativo, saltar

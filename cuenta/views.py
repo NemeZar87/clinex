@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import CrearCuenta, InicioSesion
 from cuenta.services.servicios import crear_cuenta, iniciar_sesion, cerrar_sesion, medico_required
-from .services.lector_dni import lector_total
+# from .services.lector_dni import lector_total
 from .models import Paciente, UsuarioPersonalizado, Medico
 from turno.models import Turno
 # from principal.services.servicios import guardar_localidades, obtener_todas_localidades, obtener_todos_gobiernos_locales
