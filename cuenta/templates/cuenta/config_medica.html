@@ -7,44 +7,46 @@
 {% endblock %}
 
 {% block main %}
-<!-- 1 - turnos, 2 - historia clinica, 3- configuracion medica, 4- configuracion del perfil, 5 - mi historia, 6 - apecto, 7 - acerca de¿-->    <ul class="ul_contenedor2">
-        <li><a href="{% url 'cuenta:turnos' %}">Turnos</a></li>
-        {% if user.tipo_cuenta == 'medico' %}        
-        <li><a href="{% url 'historia_clinica:historia_clinica' %}">Historia clinica</a></li>
-        {% endif %}
-        <li id="seleccionado">Configuración medica</li>
-        <li><a href="{% url 'cuenta:config_perfil' %}">Configuracion de perfil</a></li>
-        <li><a href="{% url 'historia_clinica:mi_historia' %} ">Mi historia clinica</a></li>
-        <li><a href="#">aspecto</a></li>
-        <li><a href="#">acerca de</a></li>
-    </ul>
-    
-    <form method="post">
+<ul class="ul_contenedor2">
+    <li><a href="{% url 'cuenta:config_perfil' %}">Configuracion de perfil</a></li>
+    <li id="seleccionado">Configuración medica</li>
+    <li><a href="{% url 'cuenta:turnos' %}">Turnos</a></li>
+    <li><a href="{% url 'cuenta:historia_clinica' %}">Historia clinica</a></li>
+    <li><a href="#">aspecto</a></li>
+    <li><a href="#">acerca de</a></li>
+</ul>
+
+<form method="post">
     {% csrf_token %}
     <fieldset>
         <legend>Ubicación del médico</legend>
 
-        <label for="localidad">Localidad:</label>
-        <select name="localidad" id="localidad">
-            <option value="">Seleccionar localidad</option>
-            {% for loc in localidades %}
-                <option value="{{ loc.id }}" {% if medico.localidad and medico.localidad.id == loc.id %}selected{% endif %}>
-                    {{ loc.nombre }}
-                </option>
+        <!-- PROVINCIA -->
+        <label for="provincia">Provincia:</label>
+        <select id="provincia">
+            <option value="">Seleccionar provincia</option>
+            {% for p in provincias %}
+                <option value="{{ p.id_indec }}">{{ p.nombre }}</option>
             {% endfor %}
         </select>
 
-        <label for="gobierno_local">Gobierno Local:</label>
-        <select name="gobierno_local" id="gobierno_local">
-            <option value="">Seleccionar gobierno local</option>
-            {% for gob in gobiernos %}
-                <option value="{{ gob.id }}" {% if medico.gobierno_local and medico.gobierno_local.id == gob.id %}selected{% endif %}>
-                    {{ gob.nombre }}
-                </option>
-            {% endfor %}
+        <!-- DEPARTAMENTO -->
+        <label for="departamento">Departamento:</label>
+        <select id="departamento" name="departamento">
+            <option value="">Seleccionar departamento</option>
+        </select>
+
+        <!-- LOCALIDAD -->
+        <label for="localidad">Localidad:</label>
+        <select id="localidad" name="localidad">
+            <option value="">Seleccionar localidad</option>
         </select>
 
         <input type="submit" value="Actualizar ubicación">
     </fieldset>
 </form>
+{% endblock %}
+
+{% block js %}
+<script src="{% static 'cuenta/config_medico.js' %}"></script>
 {% endblock %}

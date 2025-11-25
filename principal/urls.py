@@ -5,5 +5,6 @@ app_name = 'principal'
 
 urlpatterns = [
     path("", views.index, name="index"),
-    path("perfil/", views.perfil_medico, name="perfil-medico"),
+    path("ajax/departamentos/<int:prov_id>/", views.ajax_departamentos, name="ajax_departamentos"),
+    path("ajax/localidades/<str:dep_id>/", views.ajax_localidades, name="ajax_localidades"),
 ]
