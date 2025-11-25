@@ -116,6 +116,13 @@ def configuracion_medica_view(request):
 
 
 def configuracion_perfil_view(request):
+    op_perfil = {
+        "config_perfil": False,
+        "config_medica": True,
+        "turnos": True,
+        "historia_clinica": True,
+        "mi_historial_": True
+    }
     return render(request, "cuenta/config_perfil.html")
 
 def cronograma(request):
