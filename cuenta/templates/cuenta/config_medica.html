@@ -8,14 +8,6 @@
 
 {% block main %}
 <ul class="ul_contenedor2">
-<<<<<<< HEAD
-    <li><a href="{% url 'cuenta:config_perfil' %}">Configuracion de perfil</a></li>
-    <li id="seleccionado">Configuración medica</li>
-    <li><a href="{% url 'cuenta:turnos' %}">Turnos</a></li>
-    <li><a href="{% url 'historia_clinica:historia_clinica' %}">Historia clinica</a></li>
-    <li><a href="#">aspecto</a></li>
-    <li><a href="#">acerca de</a></li>
-=======
     {% for clave, valor in opciones.items %}
         <li 
             {% if not valor.2 %}
@@ -37,7 +29,6 @@
         {% endif %}
         </li>
     {% endfor %}
->>>>>>> origin
 </ul>
 
 <form method="post">
