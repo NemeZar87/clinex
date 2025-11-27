@@ -12,7 +12,6 @@
     <aside class="barra_lateral">
         <h2>Panel de publicidad y noticias</h2>
         <ul>
-            <li><a href="{% url 'turno:calendario' %}">medico = 2</a></li>
             <li>Agrega anuncio aquí</li>
             <li>Agrega anuncio aquí</li>
             <li>Agrega anuncio aquí</li>
@@ -56,9 +55,10 @@
             <ul>
                 {% for m in medicos %}
                 <li>
-                    {{ m.usuario.first_name }} {{ m.usuario.last_name }} — 
+                    {{ m.usuario.get_full_name }} — 
                     {{ m.especialidad }} —
-                    {{ m.localidad.nombre }} ({{ m.localidad.departamento.provincia.nombre }})
+                    {{ m.localidad.nombre }} ({{ m.localidad.departamento.provincia.nombre }}) -
+                    <a href="{% url 'principal:perfil_medico' m.id%}">Ver perfil</a>
                 </li>
                 {% empty %}
                 <p>No se encontraron médicos.</p>

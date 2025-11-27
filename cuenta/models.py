@@ -36,6 +36,14 @@ class Medico(models.Model):
         ('dentista', 'Dentista'),
     ]
     especialidad = models.CharField(max_length=20, choices=ESPECIALIDADES, default="medico-clinico")
+    localidad = models.ForeignKey(
+        Localidad,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="medicos"
+    )
+
 
 
 
@@ -61,13 +69,6 @@ class LugarTrabajo(models.Model):
     nombre = models.CharField(max_length=100)
     direccion = models.CharField(max_length=255)
     telefono = models.CharField(max_length=20, blank=True, null=True)
-    localidad = models.ForeignKey(
-        Localidad,
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        related_name="medicos"
-    )
 
     def __str__(self):
         return self.nombre

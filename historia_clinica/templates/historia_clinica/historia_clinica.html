@@ -23,6 +23,7 @@
         
 
     </ul>
+    {% if turnos %}
     <table border="1" cellspacing="0" cellpadding="10" align="center">
         <thead>
             <tr>
@@ -45,6 +46,9 @@
             {% endfor %}
         </tbody>
     </table>
+    {% else %}
+    <p>No tiene turnos reservados</p>
+    {% endif %}
     {% if errors %}
         <p>{ errors.error }</p>        
     {% endif %}

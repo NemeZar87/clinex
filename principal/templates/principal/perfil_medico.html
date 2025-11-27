@@ -3,7 +3,7 @@
 
 
 {% block main %}
-    <h1> {{ medico.usuario.first_name }} </h1>
+    <h1> {{ medico.usuario.get_full_name }} </h1>
     <p> {{ medico.especialidad }} </p>
     <hr>
     {% for j in lugares %}
@@ -12,6 +12,6 @@
         <p> {{ j.tel }} </p>
         <hr>
     {% endfor %}
-    <a href="{% url 'turno:calendario' %}"> calendario</a>
+    <a href="{% url 'turno:calendario' %}"> calendario (lleva a medico 1) </a>
 {% endblock %}
 
