@@ -1,17 +1,26 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block css_secundario %}
+<link rel="stylesheet" href="{% static 'principal/perfil_medico.css' %} ">
+{% endblock %}
+
 
 {% block main %}
-    <h1> {{ medico.usuario.get_full_name }} </h1>
-    <p> {{ medico.especialidad }} </p>
-    <hr>
-    {% for j in lugares %}
-        <p> {{ j.insti }} </p>
-        <p> {{ j.direc }} </p>
-        <p> {{ j.tel }} </p>
-        <hr>
-    {% endfor %}
-    <a href="{% url 'turno:calendario' %}"> calendario (lleva a medico 1) </a>
+    <main>
+        <h1> {{ medico.usuario.get_full_name }} </h1>
+        <p class="texto"><b>Especialidad:</b> {{ medico.especialidad }} </p>
+        <div class="separador"></div>
+        <h3 class="texto">Datos institución</h3>
+        {% for j in lugares %}
+        <ul>
+            <li class="texto"><b>Nombre:</b> {{ j.insti }} </li>
+            <li class="texto"><b>Dirección:</b> {{ j.direc }} </li>
+            <li class="texto"><b>Teléfono:</b> {{ j.tel }} </li>
+        </ul>
+        <div class="separador"></div>
+        {% endfor %}
+        <a href="{% url 'turno:calendario' medico.id%}" class="btn"> Reservar turnos</a>
+    </main>
 {% endblock %}
 
