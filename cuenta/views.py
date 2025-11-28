@@ -1,16 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import CrearCuenta, InicioSesion
 from cuenta.services.servicios import crear_cuenta, iniciar_sesion, cerrar_sesion, medico_required
-<<<<<<< HEAD
-from .services.lector_dni import lector_total
-from principal.models import Provincia, Departamento, Localidad
-from django.http import JsonResponse
-from cuenta.models import UsuarioPersonalizado
-=======
 # from .services.lector_dni import lector_total
 from .models import Paciente, UsuarioPersonalizado, Medico
->>>>>>> ffede1
 from turno.models import Turno
+from principal.models import Provincia, Departamento, Localidad
 
 
 def crear_cuenta_view(request):
