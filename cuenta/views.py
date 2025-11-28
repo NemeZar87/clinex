@@ -1,11 +1,18 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import CrearCuenta, InicioSesion
 from cuenta.services.servicios import crear_cuenta, iniciar_sesion, cerrar_sesion, medico_required
+<<<<<<< HEAD
 from .services.lector_dni import lector_total
 from principal.models import Provincia, Departamento, Localidad
 from django.http import JsonResponse
 # from .services.lector_dni import lector_total
 from .models import Paciente, UsuarioPersonalizado, Medico
+=======
+# from .services.lector_dni import lector_total
+from principal.models import Provincia, Departamento, Localidad
+from django.http import JsonResponse
+from cuenta.models import UsuarioPersonalizado
+>>>>>>> 33baff04f46b19b1787c4d13e1e6c78888278902
 from turno.models import Turno
 
 

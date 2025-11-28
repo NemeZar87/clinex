@@ -23,29 +23,36 @@
         
 
     </ul>
-    <table border="1" cellspacing="0" cellpadding="10" align="center">
-        <thead>
-            <tr>
-                <th>Paciente</th>
-                <th>Fecha</th>
-                <th>Historia clinica</th>
-                <th>Datos paciente</th>
-                <th>Consulta</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for turno in turnos %}
-            <tr>
-                <td>{{ turno.paciente_nombre.get_full_name }} </td>
-                <td>{{ turno.inicio }} </td>
-                <td><a href="{% url 'historia_clinica:detalle_paciente' turno.paciente_nombre.id %} ">Ver historia clinica</a> </td>
-                <td><a href="{% url 'historia_clinica:cargar_datos' turno.paciente_nombre.id %} ">Cargar datos del paciente</a></td>
-                <td><a href="{% url 'historia_clinica:crear_consulta' turno.paciente_nombre.id %} ">Crear consulta</a> </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    {% if errors %}
+    <main>
+
+        {% if turnos %}
+        <table border="1" cellspacing="0" cellpadding="10" align="center">
+            <thead>
+                <tr>
+                    <th>Paciente</th>
+                    <th>Fecha</th>
+                    <th>Historia clinica</th>
+                    <th>Datos paciente</th>
+                    <th>Consulta</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for turno in turnos %}
+                <tr>
+                    <td>{{ turno.paciente_nombre.get_full_name }} </td>
+                    <td>{{ turno.inicio }} </td>
+                    <td><a href="{% url 'historia_clinica:detalle_paciente' turno.paciente_nombre.id %} ">Ver historia clinica</a> </td>
+                    <td><a href="{% url 'historia_clinica:cargar_datos' turno.paciente_nombre.id %} ">Cargar datos del paciente</a></td>
+                    <td><a href="{% url 'historia_clinica:crear_consulta' turno.paciente_nombre.id %} ">Crear consulta</a> </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p>No tiene turnos reservados</p>
+        {% endif %}
+        {% if errors %}
         <p>{ errors.error }</p>        
-    {% endif %}
+        {% endif %}
+    </main>
 {% endblock %}

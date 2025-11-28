@@ -56,7 +56,7 @@ def crear_turno(request, year, month, day):
         turno = get_object_or_404(Turno, id=turno_id)
         turno.paciente_nombre = paciente
         turno.save()
-        return redirect("turno:calendario")
+        return redirect("turno:calendario", medico.id)
 
     # print("punto 3")
     # print(medico)
@@ -71,7 +71,7 @@ def crear_turno(request, year, month, day):
 
 
 
-def calendario(request):
+def calendario(request, medico_id):
     """
     Muestra el calendario del mes actual para un médico previamente seleccionado.
     Solo muestra turnos dentro del mes actual.
@@ -144,9 +144,9 @@ def calendario(request):
 
     # Obtener el médico previamente seleccionado
     # print(f"Id del medico = {request.session.get("medico_id")}")
-    medico_id = 1
+    # medico_id = 1
     # medico_id = request.session.get("medico_id")  # o usar un ID fijo: medico_id = 1
-    horario_query = get_object_or_404(HorarioTrabajo, pk=1)
+    horario_query = get_object_or_404(HorarioTrabajo, pk=medico_id)
     medico_var = horario_query.medico
     
     dia_laboral = horario_query.dia
@@ -200,13 +200,13 @@ def calendario(request):
                     ).exists()
                     #Ponemos el color que corresponda, dependiendo si hay turnos libres o no.
                     if turno_libre:
-                        dicc_temp["color"] = "green"
+                        dicc_temp["color"] = "#28a745"
                     else:
-                        dicc_temp["color"] = "red"
+                        dicc_temp["color"] = "#E74C3C"
                     dicc_temp["weekday"] = weekday_text
                 #Si no es dia laborable, se pinta de gris.
                 else:
-                    dicc_temp["color"] = "gray"
+                    dicc_temp["color"] = "#cfcfcf"
                 
                 fila.append(dicc_temp)
         calendario.append(fila)

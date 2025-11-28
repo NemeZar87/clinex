@@ -36,7 +36,6 @@ class Medico(models.Model):
         ('dentista', 'Dentista'),
     ]
     especialidad = models.CharField(max_length=20, choices=ESPECIALIDADES, default="medico-clinico")
-
     localidad = models.ForeignKey(
         Localidad,
         on_delete=models.SET_NULL,
@@ -44,6 +43,9 @@ class Medico(models.Model):
         blank=True,
         related_name="medicos"
     )
+
+
+
 
 def __str__(self):
     nombre = f"{self.usuario.first_name} {self.usuario.last_name}".strip()

@@ -2,7 +2,7 @@ from django.shortcuts import render
 from cuenta.models import UsuarioPersonalizado
 from cuenta.models import Medico, HorarioTrabajo
 from principal.models import Departamento, Localidad, Provincia 
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 # Create your views here.
 
 def index(request):
@@ -13,8 +13,8 @@ def index(request):
     return render(request, "principal/index.html", ctx)
 
 
-def perfil_medico(request):
-    medico_id = 1 #esto tiene que llegar de los filtos, solo sirve para pruebas.
+def perfil_medico(request, medico_id):
+    # medico_id = 1 #esto tiene que llegar de los filtos, solo sirve para pruebas.
     medico_qs = HorarioTrabajo.objects.filter(medico_id=medico_id) #agregar filtro por depto
     lista_medico = list(medico_qs)
     try:

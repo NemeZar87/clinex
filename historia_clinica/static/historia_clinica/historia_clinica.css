@@ -1,13 +1,35 @@
 html {
     font-size: 16px;
 }
+main {
+    height: 100%;
+    width: 100vw;
+    /* margin: 1rem; */
+}
 
-table{
-    width: 50% ;
-    height: 50% ;
+table {
+    margin: auto;
+    width: 100%;
+}
+
+th {
+    background-color: #ddd;
 }
 
 th, td {
-    padding: 2rem 0;
     text-align: center;
+    padding: 2rem 0;
+}
+
+@media (max-width: 480px) {
+    html {
+        font-size: 10px;
+    }
+    table{
+        width: 100%;
+    }
+    td, a {
+        font-size: 0.7rem;
+    }
+
 }

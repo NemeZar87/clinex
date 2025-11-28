@@ -29,10 +29,7 @@ def mi_historia_clinica(request):
 
 @medico_required
 def historia_clinica_view(request):
-    try:
-        medico = get_object_or_404(Medico, usuario=request.user)
-    except Http404:
-        return HttpResponse("No se han encontrado historias clinica")
+    medico = get_object_or_404(Medico, usuario=request.user)
     turnos_reservados = Turno.objects.filter(
         medico=medico,
         paciente_nombre__isnull=False
@@ -82,7 +79,10 @@ def crear_consulta(request, paciente_id):
     return render(request, 'historia_clinica/crear_consulta.html', {'form': form, 'paciente': paciente})
 
 def detalle_paciente(request, paciente_id):
-    paciente = get_object_or_404(HistoriaClinica, usuario_id=paciente_id)
+    try:
+        paciente = get_object_or_404(HistoriaClinica, usuario_id=paciente_id)
+    except Http404:
+        return HttpResponse("No se ha encontrado la historia clinica del paciente")
     consultas = Consulta.objects.filter(usuario_id=paciente_id, profesional=request.user).order_by('-fecha')
 
     ctx =  {
