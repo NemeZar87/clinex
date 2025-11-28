@@ -2,12 +2,36 @@ html {
     font-size: 16px;
 }
 
+main {
+    text-align: center;
+    margin: 0.5rem;
+}
+
+main h1 {
+    margin: 2rem 0;
+}
+
 table{
     width: 50% ;
     height: 50% ;
+    margin: auto;
 }
 
 th, td {
     padding: 2rem 0;
     text-align: center;
+}
+
+th {
+    background-color: #ddd;
+}
+
+
+@media (max-width: 480px) {
+    html {
+        font-size: 10px;
+    }
+    table{
+        width: 100%;
+    }
 }

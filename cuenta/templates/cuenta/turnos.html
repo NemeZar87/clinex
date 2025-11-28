@@ -35,7 +35,7 @@
     
 
     <main>
-        <h2>Turnos reservados</h2>
+        <h1>Turnos reservados</h1>
         {% if reserva %}
         <table border="1" cellspacing="0" cellpadding="10" align="center">
             <thead>
@@ -43,7 +43,6 @@
                     <th>Medico</th>
                     <th>Dia</th>
                     <th>Hora</th>
-                    <th>Atendido</th>
                 </tr>
             </thead>
             <tbody>
@@ -51,13 +50,12 @@
                 {% for j in turnos %}
                 <tr>
                     {% if j.medico and j.fecha %}
-                    <td>{{ j.medico.usuario.first_name }}</td>
-                    <td>{{ j.fecha.date }}</td>
-                    <td>{{ j.fecha.time }}</td>
+                    <td id="nombre">{{ j.medico.usuario.get_full_name }}</td>
+                    <td id="dia">{{ j.fecha.date }}</td>
+                    <td id="Hora">{{ j.fecha.time }}</td>
                     {% else %}
                     <p></p>
                     {% endif %}
-                    <td>True/False</td>
                 </tr>
                 {% endfor %}
             </tbody>

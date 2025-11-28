@@ -2,8 +2,8 @@
 {% load static %}
 
 {% block css_secundario %}
-    <link rel="stylesheet" href="{% static 'cuenta/compartido.css' %}">
     <link rel="stylesheet" href="{% static 'historia_clinica/mi_historia.css' %} ">
+    <link rel="stylesheet" href="{% static 'cuenta/compartido.css' %}">
 {% endblock %}
 
 
@@ -29,18 +29,19 @@
     
 
 </ul>
-
-<h1>Mi historia clinica</h1>
-<hr>
-<h2>Datos personales</h2>
-<ul>
-    <li>Teléfono: {{ historia.telefono }}</li>
+<main>
+    <h1>Mi historia clinica</h1>
+    <div class="separador"></div>
+    <h2>Datos personales</h2>
+    <ul>
+        <li>Teléfono: {{ historia.telefono }}</li>
     <li>Dirección: {{ historia.direccion }}</li>
     <li>Estado civil: {{ historia.estado_civil }}</li>
     <li>Obra social: {{ historia.obra_social }}</li>
 </ul>
+<div class="separador"></div>
 
-<h3>Antecedentes médicos</h3>
+<h2>Antecedentes médicos</h2>
 <ul>
     <li>Enfermedades crónicas: {{ historia.enfermedades_cronicas }}</li>
     <li>Alergias: {{ historia.alergias }}</li>
@@ -50,35 +51,33 @@
     <li>Antecedentes familiares: {{ historia.antecedentes_familiares }}</li>
 </ul>
 
-<hr>
+<div class="separador"></div>
 
 <h2>Consultas registradas</h2>
 
 {% if consultas %}
-    <table border="1" cellspacing="0" cellpadding="10" align="center"> 
-        <thead>
+<table border="1" cellspacing="0" cellpadding="10" align="center"> 
+    <thead>
         <tr>
-                <th>Profesional</th>
-                <th>Fecha</th>
-                <th>Motivo</th>
-                <th>Información</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for consulta in consultas %}
-            <tr>
-                <td>{{ consulta.profesional }} </td>
-                <td>{{ consulta.fecha }} </td>
-                <td>{{ consulta.motivo }} </td>
-                <td><a href="{% url 'historia_clinica:ver_consulta' consulta.id %} ">Ver Información</a> </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+            <th>Profesional</th>
+            <th>Fecha</th>
+            <th>Motivo</th>
+            <th>Información</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for consulta in consultas %}
+        <tr>
+            <td>{{ consulta.profesional }} </td>
+            <td>{{ consulta.fecha }} </td>
+            <td>{{ consulta.motivo }} </td>
+            <td><a href="{% url 'historia_clinica:ver_consulta' consulta.id %} ">Ver Información</a> </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 {% else %}
-    <p>Usted no tiene consultas registradas.</p>
+<p>Usted no tiene consultas registradas.</p>
 {% endif %}
-
-
-
+</main>
 {% endblock %}

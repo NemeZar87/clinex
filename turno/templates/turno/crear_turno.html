@@ -1,17 +1,39 @@
 {% extends "base.html" %}
-{% block main %}
-<h2>Turnos disponibles el {{ fecha }} con {{ medico.usuario.get_full_name }}</h2>
+{% load static %}
 
-<form method="post">
-    {% csrf_token %}
-    {% for turno in turnos %}
-        <div>
-            <input type="radio" name="turno_id" value="{{ turno.id }}" id="turno{{ turno.id }}">
-            <label for="turno{{ turno.id }}">{{ turno.inicio|time:"H:i" }}</label>
-        </div>
-    {% empty %}
+{% block css_secundario %}
+    <link rel="stylesheet" href="{% static 'turno/crear_turno.css' %} ">
+{% endblock  %}
+
+{% block main %}
+<main>
+    <h1>Turnos disponibles el {{ fecha }} con {{ medico.usuario.get_full_name }}</h1>
+    
+    <form method="post">
+        {% csrf_token %}
+        {% if turnos %}
+        <table  border="1" cellspacing="0" cellpadding="10" align="center">
+            <thead>
+                <th>Hora</th>
+                <th>Reservar</th>
+            </thead>
+            <tbody>
+                {% for turno in turnos %}
+                <tr>
+                    <td id="label">
+                        <label for="turno{{ turno.id }}">{{ turno.inicio|time:"H:i" }}</label>
+                    </td>
+                    <td>
+                        <input type="radio" name="turno_id" value="{{ turno.id }}" id="turno{{ turno.id }}">
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <button type="submit" class="btn">Confirmar turno</button>
+        {% else %}
         <p>No hay turnos disponibles este día.</p>
-    {% endfor %}
-    <button type="submit">Confirmar turno</button>
-</form>
+        {% endif %}
+    </form>
+</main>
 {% endblock %}
