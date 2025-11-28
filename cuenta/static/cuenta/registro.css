@@ -16,7 +16,7 @@ form {
     justify-content: center;
     align-items: center;
     width: 100%;
-    gap: 1rem;
+    margin-top: 2rem;
 }
 
 fieldset {
@@ -25,6 +25,7 @@ fieldset {
     width: 350pt;
     background-color: #ddd;
     border: 2pt solid #555;
+    align-items: center;
 }
 
 .campos {
@@ -75,6 +76,7 @@ button, input, select, .campo-dni {
 
 #id_tipo_cuenta {
     margin-top: 10pt;
+    border: 2px solid #777;
 }
 
 label {

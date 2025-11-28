@@ -1,0 +1,22 @@
+# 1. Entornos Virtuales
+venv/
+.venv/
+env/
+*.pyc
+
+# 2. Archivos de Bases de Datos
+db.sqlite3
+
+# 3. Variables de Entorno y Archivos Secretos
+.env
+*.log
+
+# 4. Archivos de Medios y Estáticos
+# Carpeta donde se suben imágenes/archivos de usuarios
+media/
+
+# 5. Archivos generados por Python
+__pycache__/
+
+# 6. Archivos de VS Code (opcional pero recomendado)
+.vscode/

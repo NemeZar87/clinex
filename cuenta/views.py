@@ -1,15 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import CrearCuenta, InicioSesion
 from cuenta.services.servicios import crear_cuenta, iniciar_sesion, cerrar_sesion, medico_required
-<<<<<<< HEAD
 from .services.lector_dni import lector_total
 from principal.models import Provincia, Departamento, Localidad
 from django.http import JsonResponse
-from cuenta.models import UsuarioPersonalizado
-=======
 # from .services.lector_dni import lector_total
 from .models import Paciente, UsuarioPersonalizado, Medico
->>>>>>> ffede1
 from turno.models import Turno
 
 
@@ -69,7 +65,7 @@ def servicios_view(request):
 
     # HTML: valor.0 == *texto visible, valor.1 == *ruta, valor.2 == activo o no
     # Python:
-    #   "nompre opcional": {
+    #   "nombre opcional": {
     #       "Texto visible", // "Configuracion medica",
     #       "ruta de la pagina", // "cuenta:config_medica",
     #       valor buleano para saber si es un link o no, pongan False si se encuentran en la misma pagina de la view // True o False
