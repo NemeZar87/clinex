@@ -6,6 +6,7 @@ from principal.models import Provincia, Departamento, Localidad
 from django.http import JsonResponse
 from cuenta.models import UsuarioPersonalizado
 from turno.models import Turno
+from principal.models import Provincia, Departamento, Localidad
 
 
 def crear_cuenta_view(request):

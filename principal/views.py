@@ -45,9 +45,23 @@ def perfil_medico(request, medico_id):
     #     {{ endfor }}
     # {{ endfor }}
 
+
+def ajax_departamentos(request, prov_id):
+    data = list(
+        Departamento.objects.filter(provincia_id=prov_id)
+        .values("id_indec", "nombre")
+    )
+    return JsonResponse(data, safe=False)
+
+def ajax_localidades(request, dep_id):
+    data = list(
+        Localidad.objects.filter(departamento_id=dep_id)
+        .values("id_indec", "nombre")
+    )
+    return JsonResponse(data, safe=False)
+
 def index(request):
     provincias = Provincia.objects.all()
-
     medicos = Medico.objects.select_related(
         "localidad",
         "localidad__departamento",
@@ -70,16 +84,4 @@ def index(request):
         "provincias": provincias,
         "medicos": medicos
     }
-
     return render(request, "principal/index.html", ctx)
-
-
-def ajax_departamentos(request, prov_id):
-    departamentos = Departamento.objects.filter(provincia_id=prov_id).values("id", "nombre")
-    return JsonResponse(list(departamentos), safe=False)
-
-def ajax_localidades(request, dep_id):
-    localidades = Localidad.objects.filter(departamento_id=dep_id).values("id_indec", "nombre")
-    
-    res = [{"id": loc["id_indec"], "nombre": loc["nombre"]} for loc in localidades]
-    return JsonResponse(res, safe=False)

@@ -1,42 +1,51 @@
 document.addEventListener("DOMContentLoaded", () => {
+    const selProv = document.getElementById("provincia_filter");
+    const selDep  = document.getElementById("departamento_filter");
+    const selLoc  = document.getElementById("localidad_filter");
 
-    const prov = document.getElementById("provincia");
-    const dep = document.getElementById("departamento");
-    const loc = document.getElementById("localidad");
+    const selectedProv = selProv.dataset.selected;
+    const selectedDep  = selDep.dataset.selected;
+    const selectedLoc  = selLoc.dataset.selected;
 
-    prov.addEventListener("change", () => {
-        const provId = prov.value;
-
-        dep.innerHTML = '<option value="">Todos</option>';
-        loc.innerHTML = '<option value="">Todos</option>';
-
+    function cargarDepartamentos(provId, depSeleccionado=null) {
+        selDep.innerHTML = '<option value="">Todos</option>';
+        selLoc.innerHTML = '<option value="">Todas</option>';
         if (!provId) return;
 
-        fetch(`/cuenta/api/departamentos/${provId}/`)
+        fetch(`/principal/ajax/departamentos/${provId}/`)
             .then(res => res.json())
             .then(data => {
-                dep.innerHTML = '<option value="">Todos</option>';
-                data.forEach(d => {
-                    dep.innerHTML += `<option value="${d.pk}">${d.nombre}</option>`;
+                data.forEach(dep => {
+                    const opt = document.createElement("option");
+                    opt.value = dep.pk;
+                    opt.text = dep.nombre;
+                    if(dep.pk === depSeleccionado) opt.selected = true;
+                    selDep.appendChild(opt);
                 });
+                if (depSeleccionado) cargarLocalidades(depSeleccionado, selectedLoc);
             });
-    });
+    }
 
-    dep.addEventListener("change", () => {
-        const depId = dep.value;
-
-        loc.innerHTML = '<option value="">Todos</option>';
-
+    function cargarLocalidades(depId, locSeleccionada=null) {
+        selLoc.innerHTML = '<option value="">Todas</option>';
         if (!depId) return;
 
-        fetch(`/cuenta/api/localidades/${depId}/`)
+        fetch(`/principal/ajax/localidades/${depId}/`)
             .then(res => res.json())
             .then(data => {
-                loc.innerHTML = '<option value="">Todas</option>';
-                data.forEach(l => {
-                    loc.innerHTML += `<option value="${l.pk}">${l.nombre}</option>`;
+                data.forEach(loc => {
+                    const opt = document.createElement("option");
+                    opt.value = loc.pk;
+                    opt.text = loc.nombre;
+                    if(loc.pk === locSeleccionada) opt.selected = true;
+                    selLoc.appendChild(opt);
                 });
             });
+    }
 
-    });
+    selProv.addEventListener("change", () => cargarDepartamentos(selProv.value));
+    selDep.addEventListener("change", () => cargarLocalidades(selDep.value));
+
+    // cargar seleccion inicial si hay GET
+    if(selectedProv) cargarDepartamentos(selectedProv, selectedDep);
 });
