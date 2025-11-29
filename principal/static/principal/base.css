@@ -146,3 +146,52 @@ footer {
     width: 100%;
     margin-top: auto;
 }
+
+
+/* Botón hamburguesa oculto en desktop */
+.toggle-button {
+    color: black;
+    display: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+
+@media (max-width: 480px) {
+    .toggle-button {
+        display: flex;
+        flex-direction: column;
+        width: 25px;        /* ancho del botón */
+        height: 20px;       /* alto total del botón */
+        cursor: pointer;
+        padding: 0;
+    }
+    
+    .toggle-button span {
+        display: block;
+        height: 3px;            /* grosor de cada barra */
+        width: 90%;            /* ancho completo del botón */
+        background-color: #000; /* color de las barras */
+        border-radius: 2px;
+        margin: 1.5px;
+    }
+
+        .nav-links {
+        display: none;
+        width: 100%;
+    }
+
+    .nav-links ul {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .nav-links li {
+        text-align: center;
+        padding: 0.5rem 0
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+}

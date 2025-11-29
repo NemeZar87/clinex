@@ -20,7 +20,7 @@ def perfil_medico(request, medico_id):
     try:
         medico_all = lista_medico[0].medico
     except IndexError:
-        return HttpResponse("asd")
+        return HttpResponse("Hemos tenido problemas con la busqueda de medico")
     lugares = []
     for j in medico_qs:
         lugar_all = j.lugar

@@ -50,16 +50,23 @@
         {% endblock %}
         {% block nav%}
         <nav class="nav_contenedor">
-            <ul class="ul_contenedor">
-                <li><a href="{% url 'principal:index' %}">Inicio</a></li>
-                <li><a href="{% url 'cuenta:servicios' %}">Servicios</a></li>
-                <li><a href="{% url 'cuenta:contacto' %}">Contacto</a></li>
+            <a href="javascript:void(0);" class="toggle-button" id="toggleButton">
+            <span></span>
+            <span></span>
+            <span></span>
+            </a>
+            <div class="nav-links" id="navBarLinks">
 
-                {% if user.is_authenticated %}
+                <ul class="ul_contenedor">
+                    <li><a href="{% url 'principal:index' %}">Inicio</a></li>
+                    <li><a href="{% url 'cuenta:servicios' %}">Servicios</a></li>
+                    <li><a href="{% url 'cuenta:contacto' %}">Contacto</a></li>
+                    
+                    {% if user.is_authenticated %}
                     <li class="menu">
                         <!-- El nombre del usuario actúa como botón -->
                         <a id="perfil" href="{% url 'cuenta:config_perfil' %}">{{ user.first_name }} {{ user.last_name }}</a>
-
+                        
                         <!-- Contenedor del menú desplegable -->
                         <ul class="menu-content">
                             <li><a href="{% url 'cuenta:config_perfil' %}">Perfil</a></li>
@@ -69,8 +76,9 @@
                     {% else %}
                     <li><a href="{% url 'cuenta:registro' %}">Registrarse</a></li>
                     <li><a href="{% url 'cuenta:inicio-sesion' %}">Inicio sesion</a></li>
-                {% endif %}
-            </ul>
+                    {% endif %}
+                </ul>
+            </div>
         </nav>
         {% endblock %}
     </div>
@@ -93,6 +101,7 @@
         });
         });
         </script>
+        <script src="{% static 'principal/navbar.js' %} "></script>
         {% endblock %}
 
         {% block js_secundario %}

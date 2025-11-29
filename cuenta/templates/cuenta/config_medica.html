@@ -60,6 +60,33 @@
         <input type="submit" value="Actualizar ubicación">
     </fieldset>
 </form>
+<hr>
+
+<form method="post">
+    {% csrf_token %}
+    <fieldset>
+        <legend>Horarios laborales</legend>
+
+        {{ horario_form.as_p }}
+
+        <button type="submit" name="nuevo_horario">Agregar horario</button>
+    </fieldset>
+</form>
+
+<hr>
+
+<h3>Horarios ya cargados</h3>
+<ul>
+    {% for h in horarios %}
+        <li>
+            <strong>{{ h.lugar }}</strong> — {{ h.get_dia_display }}:
+            {{ h.hora_inicio }} a {{ h.hora_fin }} (cada {{ h.tiempo_turno }})
+        </li>
+    {% empty %}
+        <p>No hay horarios cargados aún.</p>
+    {% endfor %}
+</ul>
+
 {% endblock %}
 
 {% block js %}
