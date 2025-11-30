@@ -15,7 +15,8 @@
 
 {% block main %}
 <!-- 1 - turnos, 2 - historia clinica, 3- configuracion medica, 4- configuracion del perfil, 5 - mi historia, 6 - apecto, 7 - acerca de¿-->
-<ul class="ul_contenedor2">
+<button id="toggleMenu2" class="mobile-only">Opciones</button>
+<ul class="ul_contenedor2" id="menu2" >
     <li><a href="{% url 'cuenta:turnos' %}">Turnos</a></li>
     {% if user.tipo_cuenta == 'medico' %}
     <li><a href="{% url 'historia_clinica:historia_clinica' %}">Historia clinica</a></li>
@@ -23,8 +24,8 @@
     {% endif %}
     <li><a href="{% url 'cuenta:config_perfil' %}">Configuracion de perfil</a></li>
     <li id="seleccionado">Mi historia clinica</li>
-    <li><a href="{% url 'cuenta:aspecto' %}">aspecto</a></li>
-    <li><a href="#">acerca de</a></li>
+    <li><a href="{% url 'cuenta:aspecto' %}">Aspecto</a></li>
+    <!-- <li><a href="#">acerca de</a></li> -->
 
     
 

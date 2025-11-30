@@ -8,7 +8,8 @@
 
 
 {% block main %}
-    <ul class="ul_contenedor2">
+    <button id="toggleMenu2" class="mobile-only">Opciones</button>
+    <ul class="ul_contenedor2" id="menu2">
         {% for clave, valor in opciones.items %}
             <li 
                 {% if not valor.2 %}
@@ -37,3 +38,5 @@
         <button id="cambio_de_modo">Cambiar modo</button>
     </section>
 {% endblock %}
+
+

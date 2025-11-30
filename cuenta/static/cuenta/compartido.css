@@ -14,6 +14,10 @@
     display: none;
 }
 
+#menu2 li a {
+    text-decoration: none;
+}
+
 @media (max-width: 480px) {
     
     .mobile-only {
@@ -25,7 +29,8 @@
         border-radius: 5px;
         font-size: 16px;
         cursor: pointer;
-        margin: 10px;
+        width: 100%;
+        /* margin: 10px; */
     }
 
     
@@ -36,7 +41,7 @@
         width: 100%;
         background-color: #ccc;
         position: absolute;
-        top: auto; 
+        top: 18%; 
         right: 0;
         padding: 0;
     }
@@ -57,5 +62,9 @@
     
     #menu2.activo {
         display: flex;
+    }
+
+    #seleccionado {
+        color: white;
     }
 }
