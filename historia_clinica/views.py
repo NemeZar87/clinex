@@ -35,7 +35,7 @@ def historia_clinica_view(request):
         paciente_nombre__isnull=False
     ).order_by("inicio")
     lista_turnos_reservados = list(turnos_reservados)
-    print(lista_turnos_reservados)
+    # print(lista_turnos_reservados)
     ctx = {
         "turnos": lista_turnos_reservados,
     }

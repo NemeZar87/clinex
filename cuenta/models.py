@@ -89,7 +89,7 @@ class HorarioTrabajo(models.Model):
     tiempo_turno = models.DurationField(help_text='Duración entre turnos. Ejemplo: 00:20:00 para 20 minutos')
 
     medico = models.ForeignKey(Medico, on_delete=models.CASCADE, related_name='horario')
-    lugar = models.ForeignKey(LugarTrabajo, on_delete=models.CASCADE, related_name='horario')
+    lugar = models.ForeignKey(LugarTrabajo, on_delete=models.CASCADE, related_name='lugares', help_text='Debe ingresar un lugar de trabajo previamente.', null=True)
 
     class Meta:
         unique_together = ('medico', 'lugar', 'dia', 'hora_inicio', 'hora_fin')

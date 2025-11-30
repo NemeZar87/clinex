@@ -5,13 +5,15 @@ from django.db import models
 # ==============================
 class Provincia(models.Model):
     id_indec = models.CharField(
-        max_length=5,
-        default="Buenos Aires",
+        max_length=25,
         primary_key=True,
         unique=True,
         verbose_name="ID INDEC"
     )
-    nombre = models.CharField(max_length=100, unique=True)
+    nombre = models.CharField(
+        max_length=100,
+        unique=True
+    )
 
     class Meta:
         db_table = 'principal_provincia'
@@ -26,8 +28,7 @@ class Provincia(models.Model):
 # ==============================
 class Departamento(models.Model):
     id_indec = models.CharField(
-        max_length=10,
-        default="Brandsen",
+        max_length=25,
         primary_key=True,
         unique=True,
         verbose_name="ID INDEC"
@@ -35,7 +36,6 @@ class Departamento(models.Model):
     nombre = models.CharField(max_length=100)
     provincia = models.ForeignKey(
         Provincia,
-        null=True,
         on_delete=models.CASCADE,
         related_name='departamentos'
     )
@@ -54,8 +54,7 @@ class Departamento(models.Model):
 # ==============================
 class Localidad(models.Model):
     id_indec = models.CharField(
-        max_length=15,
-        default="Coronel Brandsen",
+        max_length=25,
         primary_key=True,
         unique=True,
         verbose_name="ID INDEC"
@@ -63,7 +62,6 @@ class Localidad(models.Model):
     nombre = models.CharField(max_length=100)
     departamento = models.ForeignKey(
         Departamento,
-        null=True,
         on_delete=models.CASCADE,
         related_name='localidades'
     )

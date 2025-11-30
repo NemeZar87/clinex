@@ -1,33 +1,38 @@
-.barra_lateral {
+/* .barra_lateral {
     width: 250px;
     background-color: #f0f0f0;
     padding: 20px;
     display: flex;
     flex-direction: column;
-    gap: 15px; /* espacio entre li */
+    gap: 15px; /* espacio entre li *
     height: 100%;
     position: absolute;
-    right: 0;
+    right: 0; */
+
+html  {
+    font-size: 16px;
 }
 
+h2 {
+    padding: 0.1em 0;
+}
 .panel-medico h2 {
     text-align: center;
     background-color: #ccc;
 }
 
-.medico {
+/* .medico {
     border: 2px solid #ccc;
     width: 100%;
-}
 
 .panel-medico a {
     width: 30%;
-}
+} */
 
 .panel-medico {
     border: 2px solid #ccc;
     border-radius: 10px;
-    width: 700pt;
+    width: 80%;
     margin-top: 2em;
 }
 
@@ -41,11 +46,75 @@
     flex-direction: column;
     align-items: center;
     width: 100%;
-    margin-right: 250px;
+    /* margin-right: 250px; */
 }
 
 .div_contenedor {
     display: flex;
     justify-content: space-between;
     height: 100%;
+}
+
+#form-filtro {
+    padding: 0.5rem 0;
+}
+
+#form-filtro label {
+    margin-left: 0.5rem;
+}
+
+#form-filtro button {
+    display: inline-block;
+    padding: 1px 2px;
+    background-color: #ddd;
+    color: black;
+    border: 2px solid black;
+    border-radius: 5px;
+    text-decoration: none;
+    width: 7%;
+    text-align: center;
+    margin: 0 1rem;
+}
+
+table {
+    width: 100%;
+    margin: auto;
+    border: 0;
+}
+th, td {
+    border: 1px solid #ccc;
+    text-align: center;
+    padding: 0.5rem 0.2rem;
+}
+th {
+    background-color: #ccc;
+}
+
+@media (max-width: 480px) {
+    html {
+        font-size: 14px;
+    }
+    .panel-medico {
+        width: 100%;
+        margin-top: 0;
+    }
+    #form-filtro {
+        display: flex;
+        flex-direction: column;
+        padding: 0.5rem;
+    }
+    #form-filtro select{
+        width: 80%;
+    }
+    #form-filtro label {
+        margin: 0.5rem 0;
+    }
+    #form-filtro button {
+        width: 30%;
+        /* margin: auto; */
+        margin: 0.5rem auto 0 auto;
+    } 
+    ul {
+        font-size: 1.2rem;
+    }
 }

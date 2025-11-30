@@ -1,11 +1,12 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import CrearCuenta, InicioSesion
+from .forms import CrearCuenta, InicioSesion, HorarioTrabajoForm
 from cuenta.services.servicios import crear_cuenta, iniciar_sesion, cerrar_sesion, medico_required
 # from .services.lector_dni import lector_total
 from principal.models import Provincia, Departamento, Localidad
 from django.http import JsonResponse
 from cuenta.models import UsuarioPersonalizado
 from turno.models import Turno
+from principal.models import Provincia, Departamento, Localidad
 
 
 def crear_cuenta_view(request):
@@ -119,16 +120,16 @@ def turnos_view(request):
             "historia_clinica:mi_historia",
             True
             ],
-        "aspecto": [
-            "Aspecto",
-            "cuenta:aspecto",
-            True
-        ],
-        "acerca_de": [
-            "Acerca de nosotros",
-            "",
-            True
-        ]
+        # "aspecto": [
+        #     "Aspecto",
+        #     "cuenta:aspecto",
+        #     True
+        # ],
+        # "acerca_de": [
+        #     "Acerca de nosotros",
+        #     "",
+        #     True
+        # ]
     }
     ctx = {
         "turnos": todo,
@@ -149,11 +150,27 @@ def configuracion_medica_view(request):
     provincias = Provincia.objects.all()
 
     if request.method == "POST":
-        loc_id = request.POST.get("localidad")
-        if loc_id:
-            medico.localidad_id = loc_id
-            medico.save()
-        return redirect('cuenta:config_medica')
+        # Guardar horario
+        if "nuevo_horario" in request.POST:
+            form = HorarioTrabajoForm(request.POST, medico=medico)
+            if form.is_valid():
+                horario = form.save(commit=False)
+                horario.medico = medico
+                horario.save()
+                return redirect('cuenta:config_medica')
+
+        # Guardar localidad
+        if "localidad" in request.POST:
+            loc_id = request.POST.get("localidad")
+            if loc_id:
+                medico.localidad_id = loc_id
+                medico.save()
+            return redirect('cuenta:config_medica')
+
+    else:
+        form = HorarioTrabajoForm(medico=medico)
+
+    horarios = medico.horario.all()
 
     op_perfil = {
         "turnos": [
@@ -199,6 +216,8 @@ def configuracion_medica_view(request):
         "departamento_actual": departamento_actual,
         "localidad_actual": localidad_actual,
         "opciones": op_perfil,
+        "horarios": horarios,
+        "horario_form": form
     }
 
     return render(request, "cuenta/config_medica.html", ctx)

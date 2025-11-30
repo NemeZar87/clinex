@@ -9,3 +9,53 @@
 #seleccionado {
     color: #ddd;
 }
+
+.mobile-only {
+    display: none;
+}
+
+@media (max-width: 480px) {
+    
+    .mobile-only {
+        display: inline-block;
+        background-color: #ccc;
+        color: black;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        margin: 10px;
+    }
+
+    
+    #menu2 {
+        display: none; 
+        flex-direction: column;
+        gap: 0;
+        width: 100%;
+        background-color: #ccc;
+        position: absolute;
+        top: auto; 
+        right: 0;
+        padding: 0;
+    }
+
+    #menu2 li {
+        padding: 10px;
+    }
+
+    #menu2 li:last-child {
+        border-bottom: none;
+    }
+
+    #menu2 li a {
+        color: #333;
+        display: block;
+    }
+
+    
+    #menu2.activo {
+        display: flex;
+    }
+}

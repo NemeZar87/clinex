@@ -7,69 +7,77 @@
 
 {% block main %}
 <div class="div_contenedor">
-    
+
     <!-- BARRA LATERAL -->
-    <aside class="barra_lateral">
+    <!-- <aside class="barra_lateral">
         <h2>Panel de publicidad y noticias</h2>
         <ul>
             <li>Agrega anuncio aquí</li>
             <li>Agrega anuncio aquí</li>
             <li>Agrega anuncio aquí</li>
             <li>Agrega anuncio aquí</li>
-            <li>Agrega anuncio aquí</li>
         </ul>
-    </aside>
-    
+    </aside> -->
+
     <!-- BLOQUE DE FILTRO Y LISTA DE MÉDICOS -->
     <div class="pagina">
         <div class="panel-medico">
             <h2>Lista de Médicos</h2>
-            
+
             <!-- FORMULARIO DE FILTRO -->
             <form method="GET" id="form-filtro">
                 <label>Provincia:</label>
-                <select id="provincia" name="provincia">
+                <select id="provincia_filter" name="provincia" data-selected="{{ request.GET.provincia }}">
                     <option value="">Todas</option>
                     {% for p in provincias %}
-                    <option value="{{ p.pk }}">{{ p.nombre }}</option>
+                    <option value="{{ p.id_indec }}">{{ p.nombre }}</option>
                     {% endfor %}
                 </select>
-                
+
                 <label>Departamento:</label>
-                <select id="departamento" name="departamento">
+                <select id="departamento_filter" name="departamento" data-selected="{{ request.GET.departamento }}">
                     <option value="">Todos</option>
                 </select>
-                
+
                 <label>Localidad:</label>
-                <select id="localidad" name="localidad">
+                <select id="localidad_filter" name="localidad" data-selected="{{ request.GET.localidad }}">
                     <option value="">Todas</option>
                 </select>
-                
+
                 <button type="submit">Filtrar</button>
             </form>
-            
-            <hr>
-            
-            <h2>Médicos encontrados:</h2>
-            
-            <ul>
-                {% for m in medicos %}
-                <li>
-                    {{ m.usuario.get_full_name }} — 
-                    {{ m.especialidad }} —
-                    {{ m.localidad.nombre }} ({{ m.localidad.departamento.provincia.nombre }}) -
-                    <a href="{% url 'principal:perfil_medico' m.id%}">Ver perfil</a>
-                </li>
-                {% empty %}
+
+            <h2>Médicos encontrados</h2>
+            <table  border="1" cellspacing="0" cellpadding="10" align="center">
+                <thead>
+                    <tr>
+
+                        <th>nombre</th>
+                        <th>especialidad</th>
+                        <th>Localidad</th>
+                        <th>Perfil</th>
+                        </tr>
+                    </thead>
+                <tbody>
+                    
+                    {% for m in medicos %}
+                    <tr>
+                        <td> {{ m.usuario.get_full_name }} </td>
+                        <td> {{ m.especialidad }} </td>
+                        <td> {{ m.localidad.nombre }} ({{ m.localidad.departamento.provincia.nombre }}) </td>
+                        <td> <a href="{% url 'principal:perfil_medico' m.id%}">Ver perfil</a> </td>
+                            
+                    </tr>
+                </tbody>
+                    {% empty %}
                 <p>No se encontraron médicos.</p>
                 {% endfor %}
-            </ul>
-            
-            
-            
-            {% endblock %}
-            
-            
-            {% block div %}
-            <script src="{% static 'principal/filtro_medicos.js' %}"></script>
-            {% endblock %}
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block div %}
+<script src="{% static 'principal/filtro_medicos.js' %}"></script>
+{% endblock %}
