@@ -31,12 +31,14 @@
             </li>
         {% endfor %}
     </ul>
-
-    {% if errors %}
-        <p>{ errors.error }</p>        
-    {% endif %}
+    <main>
         
-    <h2>Usuario: {{ user.username }}</h2>
-    <h3>Nombre y apellido: {{ user.first_name }} {{ user.last_name }}</h3>
+        {% if errors %}
+        <p>{ errors.error }</p>        
+        {% endif %}
+        
+        <h2>Usuario: {{ user.username }}</h2>
+        <h3>Nombre y apellido: {{ user.first_name }} {{ user.last_name }}</h3>
+    </main>
 
 {% endblock %}

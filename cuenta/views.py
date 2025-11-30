@@ -120,16 +120,16 @@ def turnos_view(request):
             "historia_clinica:mi_historia",
             True
             ],
-        "aspecto": [
-            "Aspecto",
-            "cuenta:aspecto",
-            True
-        ],
-        "acerca_de": [
-            "Acerca de nosotros",
-            "",
-            True
-        ]
+        # "aspecto": [
+        #     "Aspecto",
+        #     "cuenta:aspecto",
+        #     True
+        # ],
+        # "acerca_de": [
+        #     "Acerca de nosotros",
+        #     "",
+        #     True
+        # ]
     }
     ctx = {
         "turnos": todo,

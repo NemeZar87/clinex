@@ -140,6 +140,7 @@ ul, li {
     z-index: 2;
     background-color: #ddd;
     height: 100%;
+    pointer-events: none;
 }
 
 footer {
@@ -194,4 +195,8 @@ footer {
     .nav-links.active {
         display: flex;
     }
+
+    .menu-content {
+        left: 0;                  /* Izquierda */
+        width: 100vw;             /* Ancho completo de la ventana */}
 }

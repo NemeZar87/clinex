@@ -9,7 +9,7 @@
 <div class="div_contenedor">
 
     <!-- BARRA LATERAL -->
-    <aside class="barra_lateral">
+    <!-- <aside class="barra_lateral">
         <h2>Panel de publicidad y noticias</h2>
         <ul>
             <li>Agrega anuncio aquí</li>
@@ -17,7 +17,7 @@
             <li>Agrega anuncio aquí</li>
             <li>Agrega anuncio aquí</li>
         </ul>
-    </aside>
+    </aside> -->
 
     <!-- BLOQUE DE FILTRO Y LISTA DE MÉDICOS -->
     <div class="pagina">
@@ -47,21 +47,32 @@
                 <button type="submit">Filtrar</button>
             </form>
 
-            <hr>
+            <h2>Médicos encontrados</h2>
+            <table  border="1" cellspacing="0" cellpadding="10" align="center">
+                <thead>
+                    <tr>
 
-            <h2>Médicos encontrados:</h2>
-            <ul>
-                {% for m in medicos %}
-                <li>
-                    {{ m.usuario.get_full_name }} — 
-                    {{ m.especialidad }} —
-                    {{ m.localidad.nombre }} ({{ m.localidad.departamento.provincia.nombre }}) -
-                    <a href="{% url 'principal:perfil_medico' m.id%}">Ver perfil</a>
-                </li>
-                {% empty %}
+                        <th>nombre</th>
+                        <th>especialidad</th>
+                        <th>Localidad</th>
+                        <th>Perfil</th>
+                        </tr>
+                    </thead>
+                <tbody>
+                    
+                    {% for m in medicos %}
+                    <tr>
+                        <td> {{ m.usuario.get_full_name }} </td>
+                        <td> {{ m.especialidad }} </td>
+                        <td> {{ m.localidad.nombre }} ({{ m.localidad.departamento.provincia.nombre }}) </td>
+                        <td> <a href="{% url 'principal:perfil_medico' m.id%}">Ver perfil</a> </td>
+                            
+                    </tr>
+                </tbody>
+                    {% empty %}
                 <p>No se encontraron médicos.</p>
                 {% endfor %}
-            </ul>
+            </table>
         </div>
     </div>
 </div>
