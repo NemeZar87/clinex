@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-_d$xai&bp86d1myd^9-l5&6o6(=^8_uqiw8pq2fu241*$ye&pf
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["eesn3jeppener.pythonanywhere.com"]
 
 
 # Application definition
@@ -80,10 +80,10 @@ WSGI_APPLICATION = 'clinex_proyecto.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'clinex_bd',
-        'USER': 'root',
-        'PASSWORD': '',
-        'HOST': 'localhost',
+        'NAME': 'EESN3Jeppener$clinex_bd',
+        'USER': 'EESN3Jeppener',
+        'PASSWORD': 'juan1234',
+        'HOST': 'EESN3Jeppener.mysql.pythonanywhere-services.com',
         'PORT': '3306',
     }
 }
@@ -130,7 +130,7 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [BASE_DIR / "static" ]
 
 #indica donde compilar todos los archivos estaticos cuando se ponemos el comando collectstatic (solo en produccion)
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATIC_ROOT = BASE_DIR / 'staticservice'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
@@ -140,7 +140,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Esto cambia el modelo que usa por defecto django que es auth.User y lo cambiamos por el siguiente
 AUTH_USER_MODEL = "cuenta.UsuarioPersonalizado"
 
-#Es la url de la imagen que le aparece a todos los usuarios. 
+#Es la url de la imagen que le aparece a todos los usuarios.
 MEDIA_URL = '/media/'
 #esto indica donde se guardan archivos subidos por los usuarios en la raiz del proyecto.
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
