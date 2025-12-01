@@ -56,3 +56,21 @@ input, select {
     text-align: center;
     margin: 1rem auto;
 }
+
+/* colores */
+
+fieldset {
+    background-color: var(--fondo-claro);
+    border-color: var(--fondo-contenedor);
+}
+
+.btn {
+    background-color: var(--borde);
+    border-color: var(--fondo-contenedor);
+}
+
+@media (max-width: 480px) {
+    fieldset {
+        width: 100%;
+    }
+}
