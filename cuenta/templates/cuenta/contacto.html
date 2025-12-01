@@ -1,11 +1,34 @@
 {% extends "base.html" %}
 {% load static %}
 
+
+{% block css_secundario %}
+    <link rel="stylesheet" href="{% static 'cuenta/contacto.css' %}">
+{% endblock %}
+
+{% block titulo %}
+    <title>Contacto</title>
+{% endblock %}
+
 {% block main %}
-<h1>Contactanos</h1>
-<ul>
-    <li>gmail:idk@gmail.com</li>
-    <li>telefono: 2223 240810</li>
-    <li></li>
-</ul>
+<section class="contacto_contenedor">
+    <div class="div_contacto_contenedor">
+        <h1 class="h1_contacto">Contáctanos</h1>
+
+        <p class="descripcion_contacto">
+            Si tienes dudas, consultas o deseas comunicarte con nuestro equipo,
+            aquí tienes nuestras vías de contacto.
+        </p>
+
+        <ul class="lista_contacto">
+            <li><strong>Email:</strong> idk@gmail.com</li>
+            <li><strong>Teléfono:</strong> 2223 240810</li>
+            <li><strong>Horario:</strong> Lunes a Viernes – 08:00 a 18:00</li>
+        </ul>
+
+        <div class="contacto_extra">
+            <p>También puedes enviarnos un mensaje desde la sección de contacto dentro de tu cuenta.</p>
+        </div>
+    </div>
+</section>
 {% endblock %}

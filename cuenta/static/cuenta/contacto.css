@@ -1,0 +1,32 @@
+.contacto_contenedor {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.h1_contacto {
+    margin-bottom: 2rem;
+}
+
+.div_contacto_contenedor {
+    background-color: #ddd;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+    padding: 2rem;
+    border-radius: 15pt;
+    border: 2pt solid #555;
+}
+
+.lista_contacto {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+p {
+    text-align: center;
+}

@@ -2,38 +2,79 @@
 {% load static %}
 
 {% block css_secundario %}
-<link rel="stylesheet" href="{% static 'cuenta/servicios' %}">
+<link rel="stylesheet" href="{% static 'cuenta/servicios.css' %}">
 {% endblock %}
 
 {% block main %}
-<h1>Que es Clinex?</h1>
-<p>Clinex es una plataforma medica digital para facilitar la conexion entre pacientes y profecionales de la salud.
-Nuestro objetivo es mejorar la atencion medica a traves de herramientas simples, seguras y accesibles desde cualquier dispositivo</p>
+        <div class="servicios_contenedor">
+            <div class="div_servicios_contenedor">
+                <!-- SECCIÓN: ¿Qué es Clinex? -->
+                <section class="intro_servicios">
+                    <h1>¿Qué es Clinex?</h1>
+                    <p>
+                        Clinex es una plataforma médica digital diseñada para mejorar la comunicación entre
+                        pacientes y profesionales de la salud. Nuestro objetivo es ofrecer herramientas simples,
+                        seguras y accesibles desde cualquier dispositivo, optimizando la experiencia médica en
+                        cada consulta.
+                    </p>
+                </section>
+                <hr>
+                <!-- SECCIÓN: Servicios -->
+                <section class="lista_servicios">
+                    <h1>Nuestros Servicios</h1>
 
-<h1>Nuestros servicios</h1>
+                    <article class="servicio_item">
+                        <h2>Gestión de turnos online</h2>
+                        <p>
+                            Solicitá, modificá o cancelá tus turnos de forma rápida y sin necesidad de realizar
+                            llamadas. Elegí el día, horario y profesional directamente desde tu cuenta.
+                        </p>
+                    </article>
 
-<h2>Gestion de turnos online</h2>
-<p>solicita, modifica o cancela tus turnos de manera rapida y sin necesidad de hacer llamadas.
-Elegi el dia, horario y profesional desde tu cuenta</p>
+                    <article class="servicio_item">
+                        <h2>Panel médico personalizado</h2>
+                        <p>
+                            Los profesionales acceden a su agenda, administran pacientes, registran consultas
+                            y actualizan historias clínicas en tiempo real.
+                        </p>
+                    </article>
 
-<h2>Panel medico personalizado</h2>
-<p>los profesionales pueden acceder a su agenda, administrar pacientes, registrar consultas y actualizar la historia clinica en tiempo real.</p>
+                    <article class="servicio_item">
+                        <h2>Historia clínica digital</h2>
+                        <p>
+                            Conservá tu información médica siempre disponible y actualizada. Los médicos
+                            autorizados pueden consultar tus antecedentes para ofrecer diagnósticos más precisos.
+                        </p>
+                    </article>
 
-<h2>Historia clinica digital</h2>
-<p>conserva tu informacion medica siempre disponible y actualizada.
-los medicos autorizados pueden consultar tus antecedentes para poder ofrecer un mejor diagnostico</p>
+                    <article class="servicio_item">
+                        <h2>Gestión administrativa</h2>
+                        <p>
+                            Gestión de usuarios, control de turnos, reportes médicos y otros procesos internos
+                            desde un panel centralizado.
+                        </p>
+                    </article>
 
-<h2>Gestion administrativa</h2>
-<p>Autoriza procesos internos como registros de usuarios, control de turnos y reportes medicos, todo desde un mismo panel centralizado.</p>
+                    <article class="servicio_item">
+                        <h2>Seguridad y confidencialidad</h2>
+                        <p>
+                            Tus datos personales y médicos están protegidos bajo protocolos profesionales,
+                            cumpliendo con las normativas actuales de protección de datos.
+                        </p>
+                    </article>
+                </section>
+                <hr>
+                <!-- SECCIÓN: ¿Por qué elegirnos? -->
+                <section class="porque_eligir">
+                    <h1>¿Por qué elegir nuestros servicios?</h1>
 
-<h2>Seguridad y confidencialidad</h2>
-<p>Tus datos personales y medicos estan protegidos con protocolos a nivel profesional y cumpliendo con las normativas de protecccion de datos</p>
-
-<h1>Porque elegir nuestros servicios?</h1>
-<ul>
-    <li>ahorro de tiempo y reduccion de errores administrativos</li>
-    <li>Acceso remoto a tus turnos y a tu historia medica</li>
-    <li>Comunicacion directa con tu medico o clinica</li>
-    <li>interfaz intuitiva y adaptable a cualquier tipo de usuario</li>
-</ul>
+                    <ul class="lista_beneficios">
+                        <li>Ahorro de tiempo y reducción de errores administrativos.</li>
+                        <li>Acceso remoto a turnos e historial médico.</li>
+                        <li>Comunicación directa con profesionales o clínicas.</li>
+                        <li>Interfaz intuitiva y adaptable a cualquier tipo de usuario.</li>
+                    </ul>
+                </section>
+            </div>
+        </div>
 {% endblock %}

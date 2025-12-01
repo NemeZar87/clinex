@@ -1,3 +1,52 @@
-body {
-    gap: 15px;
+.servicios_contenedor {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.div_servicios_contenedor {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 60%;
+    background-color: #ddd;
+    margin-top: 2rem;
+    padding: 2rem;
+    border-radius: 15pt;
+    border: 2pt solid #555;
+}
+
+.intro_servicios, .lista_servicios, .servicio_item, .porque_eligir, .lista_beneficios {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.intro_servicios, .lista_servicios {
+    margin-bottom: 1rem;
+}
+
+.intro_servicios, .servicio_item {
+    margin-top: 0;
+}
+
+.servicios_contenedor ul, .servicios_contenedor li {
+    padding: 0;
+}
+
+.porque_eligir li {
+    font-weight: 800;
+    color: #555;
+}
+
+p {
+    text-align: center;
+}
+
+hr {
+    width: 95%;
 }
