@@ -9,9 +9,10 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 60%;
+    width: 750pt;
     background-color: #ddd;
     margin-top: 2rem;
+    margin-bottom: 2rem;
     padding: 2rem;
     border-radius: 15pt;
     border: 2pt solid #555;
@@ -49,4 +50,10 @@ p {
 
 hr {
     width: 95%;
+}
+
+@media (max-width: 480px) {
+    .div_servicios_contenedor {
+        width: 95%;
+    }
 }

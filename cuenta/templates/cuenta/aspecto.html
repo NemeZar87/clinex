@@ -11,25 +11,23 @@
     <button id="toggleMenu2" class="mobile-only">Opciones</button>
     <ul class="ul_contenedor2" id="menu2">
         {% for clave, valor in opciones.items %}
-            <li 
-                {% if not valor.2 %}
-                    id="seleccionado"
-                {% endif %}
-                >
-            {% if valor.2 %}
-                <a href="
-                {% if not valor.1 %}
-                    #
-                {% else %}
-                    {% url valor.1 %}
-                {% endif %}"
-                >
-                    {{ valor.0 }}
-                </a>
+            {% if valor.0 and user.tipo_cuenta == "paciente" %}
             {% else %}
-                {{ valor.0 }}
+                {% if valor.3 %}
+                    <a href="
+                    {% if not valor.2 %}
+                        #
+                    {% else %}
+                        {% url valor.2 %}
+                    {% endif %}
+                    ">
+                        {{ valor.1 }}
+                    </a>
+                {% endif %}
+                {% if not valor.3 %}
+                    <span id="seleccionado">{{ valor.1 }}</span>
+                {% endif %}
             {% endif %}
-            </li>
         {% endfor %}
     </ul>
 

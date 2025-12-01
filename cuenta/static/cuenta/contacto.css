@@ -30,3 +30,9 @@
 p {
     text-align: center;
 }
+
+@media (max-width: 480px) {
+    .div_contacto_contenedor {
+        width: 95%;
+    }
+}
