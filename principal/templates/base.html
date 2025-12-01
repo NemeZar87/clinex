@@ -29,7 +29,7 @@
                 <h1>Clinex</h1>
             </div>
             <div>
-                <p class="slogan_contenedor">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                <p class="slogan_contenedor">Simplificando la medicina, potenciando el cuidado.</p>
             </div>
         </header>
         {% endblock %}
@@ -65,7 +65,7 @@
                     {% if user.is_authenticated %}
                     <li class="menu">
                         <!-- El nombre del usuario actúa como botón -->
-                        <a id="perfil" href="{% url 'cuenta:config_perfil' %}">{{ user.get_full_name }}</a>
+                        <a id="perfil" href="#">{{ user.get_full_name }}</a>
                         
                         <!-- Contenedor del menú desplegable -->
                         <ul class="menu-content">

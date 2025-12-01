@@ -120,11 +120,11 @@ def turnos_view(request):
             "historia_clinica:mi_historia",
             True
             ],
-        # "aspecto": [
-        #     "Aspecto",
-        #     "cuenta:aspecto",
-        #     True
-        # ],
+        "aspecto": [
+            "Aspecto",
+            "cuenta:aspecto",
+            True
+        ],
         # "acerca_de": [
         #     "Acerca de nosotros",
         #     "",
@@ -203,11 +203,11 @@ def configuracion_medica_view(request):
             "cuenta:aspecto",
             True
         ],
-        "acerca_de": [
-            "Acerca de nosotros",
-            "",
-            True
-        ]
+        # "acerca_de": [
+        #     "Acerca de nosotros",
+        #     "",
+        #     True
+        # ]
     }
     ctx = {
         "medico": medico,
@@ -256,11 +256,11 @@ def configuracion_perfil_view(request):
             "cuenta:aspecto",
             True
         ],
-        "acerca_de": [
-            "Acerca de nosotros",
-            "",
-            True
-        ]
+        # "acerca_de": [
+        #     "Acerca de nosotros",
+        #     "",
+        #     True
+        # ]
     }
     return render(request, "cuenta/config_perfil.html", {"opciones": op_perfil})
 
@@ -299,11 +299,11 @@ def aspecto(request):
             "cuenta:aspecto",
             False
         ],
-        "acerca_de": [
-            "Acerca de nosotros",
-            "",
-            True
-        ]
+        # "acerca_de": [
+        #     "Acerca de nosotros",
+        #     "",
+        #     True
+        # ]
     }
     return render(request, "cuenta/aspecto.html", {"opciones": op_perfil})
 

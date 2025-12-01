@@ -51,3 +51,21 @@ button:hover {
     border-color: #555;
     color: #444;
 }
+
+/* colores */
+
+fieldset {
+    background-color: var(--fondo-claro);
+    border-color: var(--fondo-contenedor);
+}
+
+button {
+    background-color: var(--borde);
+    border-color: var(--fondo-contenedor);
+}
+
+@media (max-width: 480px) {
+    fieldset {
+        width: 100%;
+    }
+}

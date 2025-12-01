@@ -3,18 +3,15 @@ html {
 }
 main {
     height: 100%;
-    width: 100vw;
+    width: 100%;
     /* margin: 1rem; */
 }
 
 table {
-    margin: auto;
+    margin: 1rem auto 1rem auto;
     width: 100%;
 }
 
-th {
-    background-color: #ddd;
-}
 
 th, td {
     text-align: center;
@@ -23,13 +20,13 @@ th, td {
 
 @media (max-width: 480px) {
     html {
-        font-size: 10px;
+        font-size: 16px;
     }
     table{
         width: 100%;
     }
-    td, a {
-        font-size: 0.7rem;
+    td, table td a {
+        font-size: 0.9rem;
     }
 
 }

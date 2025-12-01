@@ -4,12 +4,11 @@
 {% block css_secundario %}
 <link rel="stylesheet" href="{% static 'historia_clinica/historia_clinica.css' %}">
 <link rel="stylesheet" href="{% static 'cuenta/compartido.css' %}">
-<link rel="stylesheet" href="{% static 'cuenta/config_perfil.css' %}">
 {% endblock %}
 
 {% block main %}
 <!-- 1 - turnos, 2 - historia clinica, 3- configuracion medica, 4- configuracion del perfil, 5 - mi historia, 6 - apecto, 7 - acerca de¿-->
-<button id="toggleMenu2" class="mobile-only">Opciones</button>
+    <button id="toggleMenu2" class="mobile-only">Opciones</button>
     <ul class="ul_contenedor2" id="menu2">
 
         <li><a href="{% url 'cuenta:turnos' %}">Turnos</a></li>
@@ -19,8 +18,8 @@
         {% endif %}
         <li><a href="{% url 'cuenta:config_perfil' %}">Configuracion de perfil</a></li>
         <li><a href="{% url 'historia_clinica:mi_historia' %} ">Mi historia clinica</a></li>
-        <!-- <li><a href="#">aspecto</a></li>
-        <li><a href="#">acerca de</a></li> -->
+        <li><a href="{% url 'cuenta:aspecto' %}">Aspecto</a></li>
+        <!-- <li><a href="#">acerca de</a></li> -->
 
         
 
@@ -59,6 +58,3 @@
     </main>
 {% endblock %}
 
-{% block js %}
-    <script src="{% static 'principal/navbar.js' %}"></script>
-{% endblock %}

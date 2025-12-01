@@ -86,7 +86,7 @@ class HorarioTrabajo(models.Model):
     dia = models.CharField(max_length=200, null=True, choices=DIAS_SEMANA, default='')
     hora_inicio = models.TimeField()
     hora_fin = models.TimeField()
-    tiempo_turno = models.DurationField(help_text='Duración entre turnos. Ejemplo: 00:20:00 para 20 minutos')
+    tiempo_turno = models.DurationField(help_text='Duración entre turnos. eeEjemplo: 00:20:00 para 20 minutos')
 
     medico = models.ForeignKey(Medico, on_delete=models.CASCADE, related_name='horario')
     lugar = models.ForeignKey(LugarTrabajo, on_delete=models.CASCADE, related_name='lugares', help_text='Debe ingresar un lugar de trabajo previamente.', null=True)
