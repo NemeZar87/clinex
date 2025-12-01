@@ -5,8 +5,54 @@ input[type=number]::-webkit-outer-spin-button {
     margin: 0;
 }
 /* ################################################## */
-
+html {
+    font-size: 16px;
+}
+main {
+    font-size: 1.5rem;
+}
 
 textarea {
     resize: none;
+    height: 4rem;
+
+}
+main h2{
+    text-align: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 2rem;
+}
+
+fieldset {
+    display: flex;
+    flex-direction: column;
+    width: 350pt;
+    border: 2pt solid #555;
+    padding: 1rem;
+}
+
+input, select {
+    border-style: solid;
+    width: 50%;
+    height: 2rem;
+    font-size: 80%;
+    border-radius: 3pt;
+    text-align: center;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    width: 70%;
+    text-align: center;
+    margin: 1rem auto;
 }

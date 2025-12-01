@@ -23,7 +23,6 @@ fieldset {
     display: flex;
     flex-direction: column;
     width: 350pt;
-    background-color: #ddd;
     border: 2pt solid #555;
     align-items: center;
 }
