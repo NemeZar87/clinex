@@ -65,7 +65,7 @@
                     {% if user.is_authenticated %}
                     <li class="menu">
                         <!-- El nombre del usuario actúa como botón -->
-                        <a id="perfil" href="{% url 'cuenta:config_perfil' %}">{{ user.get_full_name }}</a>
+                        <a id="perfil" href="#">{{ user.get_full_name }}</a>
                         
                         <!-- Contenedor del menú desplegable -->
                         <ul class="menu-content">

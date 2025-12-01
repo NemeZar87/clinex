@@ -1,3 +1,11 @@
+:root {
+    --fondo: white;
+    --texto: black;
+    --fondo-contenedor: #5c8abc;
+    --fondo-claro: #EAF5FB;
+    --borde: #A9C8DA;
+    --texto-a: #4B3C8C;
+}
 * {
     box-sizing: border-box;
     margin: 0;
@@ -9,10 +17,6 @@ body {
     height: 100vh;
 }
 
-:root {
-    --fondo: white;
-    --texto: black;
-}
 
 .modo_oscuro {
     --fondo: #121212;
@@ -45,7 +49,7 @@ body {
     display: flex;
     justify-content: flex-end; /* los links al final del nav */
     padding: 10px 20px;
-    background-color: #ddd;
+    background-color: var(--fondo-contenedor)
 }
 
 .ul_contenedor {
@@ -107,8 +111,8 @@ ul, li {
 
 .menu-content {
     position: absolute;
-    background-color: #ddd;
-    border: 2px solid #555;
+    background-color: var(--fondo-contenedor);
+    border: 2px solid var(--borde);
     border-top: 0;
     border-radius: 0px 0px 10px 10px;
     padding: 5px 0;
@@ -138,7 +142,7 @@ ul, li {
 #perfil {
     position: relative;
     z-index: 2;
-    background-color: #ddd;
+    background-color: var(--fondo-contenedor);
     height: 100%;
     pointer-events: none;
 }
@@ -146,6 +150,28 @@ ul, li {
 footer {
     width: 100%;
     margin-top: auto;
+}
+
+/* colores */
+table {
+    border: 1px solid var(--borde);
+}
+
+td {
+    background-color: var(--fondo-claro);
+}
+
+th {
+    background-color: var(--fondo-contenedor);
+}
+
+.btn {
+    background-color: var(--fondo-claro);
+    color: black;
+    border: 2px solid var(--fondo-contenedor)
+}
+a {
+    color: var(--texto-a)
 }
 
 

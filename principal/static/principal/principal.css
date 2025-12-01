@@ -9,6 +9,15 @@
     position: absolute;
     right: 0; */
 
+:root {
+    --fondo: white;
+    --texto: black;
+    --fondo-contenedor: #5c8abc;
+    --fondo-claro: #EAF5FB;
+    --borde: #A9C8DA;
+    --texto-a: #4B3C8C;
+}
+
 html  {
     font-size: 16px;
 }
@@ -18,22 +27,24 @@ h2 {
 }
 .panel-medico h2 {
     text-align: center;
-    background-color: #ccc;
+    background-color: var(--fondo-contenedor);
 }
 
 /* .medico {
     border: 2px solid #ccc;
     width: 100%;
+    */
 
 .panel-medico a {
-    width: 30%;
-} */
+    color: var(--texto-a);
+}  
 
 .panel-medico {
-    border: 2px solid #ccc;
+    border: 2px solid var(--borde);
     border-radius: 10px;
     width: 80%;
     margin-top: 2em;
+    background-color: var(--fondo-claro);
 }
 
 .ul-medicos {
@@ -66,9 +77,9 @@ h2 {
 #form-filtro button {
     display: inline-block;
     padding: 1px 2px;
-    background-color: #ddd;
+    background-color: var(--borde);
     color: black;
-    border: 2px solid black;
+    border: 2px solid var(--borde);
     border-radius: 5px;
     text-decoration: none;
     width: 7%;
@@ -82,12 +93,12 @@ table {
     border: 0;
 }
 th, td {
-    border: 1px solid #ccc;
+    border: 1px solid var(--borde);
     text-align: center;
     padding: 0.5rem 0.2rem;
 }
 th {
-    background-color: #ccc;
+    background-color: var(--fondo-contenedor);
 }
 
 @media (max-width: 480px) {

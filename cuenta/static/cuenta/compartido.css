@@ -16,15 +16,16 @@
 
 #menu2 li a {
     text-decoration: none;
+    color: var(--texto-a);
 }
 
 @media (max-width: 480px) {
     
     .mobile-only {
         display: inline-block;
-        background-color: #ccc;
+        background-color: var(--fondo-claro);
         color: black;
-        border: none;
+        border: 2px solid var(--fondo-contenedor);
         padding: 10px 15px;
         border-radius: 5px;
         font-size: 16px;
@@ -39,7 +40,7 @@
         flex-direction: column;
         gap: 0;
         width: 100%;
-        background-color: #ccc;
+        background-color: var(--fondo-contenedor);
         position: absolute;
         top: 18%; 
         right: 0;
@@ -55,7 +56,7 @@
     }
 
     #menu2 li a {
-        color: #333;
+        color: var(--texto);
         display: block;
     }
 

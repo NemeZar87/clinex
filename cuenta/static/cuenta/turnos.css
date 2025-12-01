@@ -13,15 +13,18 @@ main h1 {
 table{
     width: 50% ;
     margin: auto;
+    border: 1px solid var(--borde);
 }
 
 th, td {
     padding: 2rem 0;
     text-align: center;
+    background-color: var(--fondo-claro);
+    border: 1px solid var(--borde);
 }
 
 th {
-    background-color: #ddd;
+    background-color: var(--fondo-contenedor);
 }
 
 
